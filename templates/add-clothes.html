@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <h1>Add Clothes to Your Closet!</h1>
+    <form action="/add-clothes" method="POST">
+
+        <div>
+            <label>Category:  <!-- make this into jinja loop -->
+                <select name="category">
+                    <option value="default" selected="true" disabled="disabled">Choose One</option>
+                    <option value="tops">Top</option>
+                    <option value="bottoms">Bottom</option>
+                    <option value="dresses">Dress</option>
+                    <option value="jackets">Jacket</option>
+                    <option value="lounge">Lounge</option>
+                    <option value="swim">Swim</option>
+                    <option value="active">Active</option>
+                    <option value="acessories">Accessory</option>
+                    <option value="shoes">Shoes</option>
+                </select>
+            </label>
+        </div>
+
+        <div>
+            <label>Description:
+                <input type="textarea" name="description" required>
+            </label>
+        </div>
+
+        <div>
+            <label>Keywords:<br>  <!-- make this into jinja loop -->
+                <input type="checkbox" name="keyword" value="spring"> Spring<br>
+                <input type="checkbox" name="keyword" value="summer"> Summer<br>
+                <input type="checkbox" name="keyword" value="fall"> Fall<br>
+                <input type="checkbox" name="keyword" value="winter"> Winter<br>
+                <input type="checkbox" name="keyword" value="urban hike"> Urban Hike<br>
+                <input type="checkbox" name="keyword" value="dinner"> Dinner<br>  
+                <input type="checkbox" name="keyword" value="brunch"> Brunch<br>
+                <input type="checkbox" name="keyword" value="workout"> Workout<br>
+                <input type="checkbox" name="keyword" value="concert"> Concert<br>  
+                <input type="checkbox" name="keyword" value="girls night out"> Girls Night Out<br>
+                <input type="checkbox" name="keyword" value="hiking"> Hiking<br>
+                <input type="checkbox" name="keyword" value="casual date"> Casual Date<br> 
+                <input type="checkbox" name="keyword" value="stay at home"> Stay at Home<br>
+                <input type="checkbox" name="keyword" value="beach"> Beach<br>
+                <input type="checkbox" name="keyword" value="picnic"> Picnic</br> 
+                <input type="checkbox" name="keyword" value="date night"> Date Night<br>
+                <input type="checkbox" name="keyword" value="pool"> Pool<br>   
+            </label>
+        </div>
+
+        <div>
+            <label>URL:
+                <input type="text" name="string" required>
+            </label>
+        </div>
+
+        <div>
+            <input type="submit" value="Log In">
+        </div>
+
+    </form>
+{% endblock %}

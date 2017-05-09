@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+<head>
+    <title>APPNAMEIDKWHAT</title>
+</head>
+<body>
+
+APPNAMEIDKWHAT
+
+{% if "username" in session %}
+    <a href="/logout">Logout</a>
+{% else %}
+    <a href="/login">Login</a>
+{% endif %}
+
+<hr>
+
+{% for flash in get_flashed_messages() %}
+  {{ flash }}
+{% endfor %}
+
+{% block content %}
+    Put your body here.
+{% endblock %}
+
+</body>
+
+<footer>
+<img src="static/img/unnamed.png" style="width:100px;height:100px">
+</html>
