@@ -3,7 +3,7 @@
 
 CREATE TABLE users (
     username VARCHAR(30) PRIMARY KEY,
-    password VARCHAR(20) NOT NULL,
+    password VARCHAR(64) NOT NULL,
     fname VARCHAR(50),
     lname VARCHAR(50),
     bday DATE,
@@ -21,7 +21,7 @@ CREATE TABLE keyword (
 );
 
 
-CREATE TABLE article_of_clothing (
+CREATE TABLE articles (
     clothing_id SERIAL PRIMARY KEY,
     username VARCHAR(30) REFERENCES users(username) NOT NULL,
     category_id VARCHAR(30) REFERENCES category(category_id) NOT NULL,
@@ -31,15 +31,15 @@ CREATE TABLE article_of_clothing (
 
 
 CREATE TABLE clothing_keyword (
-    clothingKeyword_id SERIAL PRIMARY KEY,
-    clothing_id INT REFERENCES article_of_clothing(clothing_id) NOT NULL,
+    clothingkeyword_id SERIAL PRIMARY KEY,
+    clothing_id INT REFERENCES articles(clothing_id) NOT NULL,
     keyword_id VARCHAR(30) REFERENCES keyword(keyword_id) NOT NULL
 );
 
 -- Insert User
 
 INSERT INTO users (username, password, fname, lname, bday, zipcode)
-VALUES ('captainangela', 'password123', 'Angela', 'Lui', '1988-07-23', '94109');
+VALUES ('captainangela', 'b37550eace0ed2ee4805608b4986c332', 'Angela', 'Lui', '1988-07-23', '94109');
 
 -- Insert categories
 
@@ -78,7 +78,7 @@ VALUES ('spring'),
 
 -- Insert articles of clothing
 
-INSERT INTO article_of_clothing (username, category_id, description, url) VALUES
+INSERT INTO articles (username, category_id, description, url) VALUES
 ('captainangela', 'bottoms', 'blue jeans', 'https://pics.ae.com/is/image/aeo/3437_9867_068_f?$bvFeed$'),
 ('captainangela', 'tops', 'sports tank', 'https://s-media-cache-ak0.pinimg.com/736x/62/da/5d/62da5d4cef335c5b9afd407a2c859bd9.jpg'),
 ('captainangela', 'tops', 'grey knitted sweater', 'http://bpc.h-cdn.co/assets/16/33/480x480/gallery-1471365092-hm-melange-knit-gray-sweater.jpg'),

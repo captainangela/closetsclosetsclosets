@@ -51,13 +51,21 @@
 
         <div>
             <label>URL:
-                <input type="text" name="string" required>
+                <input type="text" name="url" id="urlBox" required>
             </label>
         </div>
 
         <div>
-            <input type="submit" value="Log In">
+            <input type="submit" value="ADD">
         </div>
 
     </form>
+    <img id='urlImg'>
+    <script>
+    var urlBox = document.getElementById('urlBox');
+    urlBox.onchange =function() {
+        var img = document.getElementById('urlImg');
+        img.src = urlBox.value;
+    };
+    </script>
 {% endblock %}

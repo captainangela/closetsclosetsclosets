@@ -18,7 +18,7 @@ class Users (db.Model):
     __tablename__ = "users"
 
     username = db.Column(db.String(30), primary_key=True)
-    password = db.Column(db.String(20), nullable=False)
+    password = db.Column(db.String(64), nullable=False)
     fname = db.Column(db.String(50), nullable=False)
     lname = db.Column(db.String(50), nullable=False)
     bday = db.Column(db.DateTime, nullable=True)
@@ -30,13 +30,13 @@ class Users (db.Model):
         return "<User username=%s name=%s %s>" % (self.username, self.fname, self.lname)
 
 
-class ArticleOfClothing(db.Model):
+class Articles(db.Model):
     """Article of clothing inside user's closet."""
 
-    __tablename__ = "article_of_clothing"
+    __tablename__ = "articles"
 
     clothing_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    username = db.Column(db.String(30), db.ForeignKey('user.username'), nullable=False)
+    username = db.Column(db.String(30), db.ForeignKey('users.username'), nullable=False)
     category_id = db.Column(db.String(30), db.ForeignKey('category.category_id'), nullable=False)
     description = db.Column(db.String(400), nullable=False)
     url = db.Column(db.String(200), nullable=False)
@@ -77,9 +77,9 @@ class ClothingKeyword(db.Model):
 
     __tablename__ = "clothing_keyword"
 
-    clothingKeyword_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    clothingkeyword_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     keyword_id = db.Column(db.String(64), db.ForeignKey('keyword.keyword_id'), nullable=False)
-    category_id = db.Column(db.String(64), db.ForeignKey('category.category_id'), nullable=False)
+    clothing_id = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=False)
 
     def __repr__(self):
         """Provide helpful representation when printed."""

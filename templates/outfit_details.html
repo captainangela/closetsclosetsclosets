@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Please enter some details about your activity</h1>
+
+<form action="/outfit_generated" method="POST">
+
+  <div>
+      <label>What zip code are you in?
+          <input type="text" name="zipcode" required>
+      </label>
+  </div>
+
+  <div>
+      <label>What activity will you be doing?
+      <select name="activity">
+        <option value="default" selected="true" disabled="disabled">Choose One</option>
+        <option value="urban hike"> Urban Hike</option>
+        <option value="dinner"> Dinner</option>  
+        <option value="brunch"> Brunch</option>
+        <option value="workout"> Workout</option>
+        <option value="concert"> Concert</option>  
+        <option value="girls night out"> Girls Night Out</option>
+        <option value="hiking"> Hiking</option>
+        <option value="casual date"> Casual Date</option> 
+        <option value="stay at home"> Stay at Home</option>
+        <option value="beach"> Beach</option>
+        <option value="picnic"> Picnic<//option> 
+        <option value="date night"> Date Night</option>
+        <option value="pool"> Pool</option>   
+    </label>
+      </label>
+  </div>
+
+  <div>
+      <input type="submit" value="Submit">
+  </div>
+
+{% endblock %}

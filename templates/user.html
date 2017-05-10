@@ -1,12 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 
-  <h1>Welcome!</h1>
+  <h1>Welcome {{ user.fname }}!</h1>
   <img src="https://i.giphy.com/kP456mbrV8CnC.gif">
   <br>
   <a href="/add-clothes"><h2>Add some clothes!</a>
   <br>
   <br>
+  <a href="/closet">See your closet</a>
+  <br>
+  <br>
+  <a href="/outfit">Get an outfit</a>
   </h2>
 
 {% endblock %}
