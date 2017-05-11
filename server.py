@@ -7,9 +7,9 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, Users, Articles, Category, Keyword, ClothingKeyword
 
-import hashlib, pyowm
+import hashlib, pyowm, random
 
-
+categories = 'tops bottoms dresses jackets lounge swim active accessories shoes'.split()
 app = Flask(__name__)
 
 # Required to use Flask sessions and the debug toolbar
@@ -177,42 +177,43 @@ def get_random_outfit():
     zipcode = request.form["zipcode"]
     activity = request.form["activity"]
 
+    #get weather for zipcode entered -- should this be in an outside function?
     observation = owm.weather_at_place(zipcode)
     weather = observation.get_weather()
     temp = weather.get_temperature('fahrenheit')
 
-    return render_template("outfit.html", temp=temp['temp'])
+    #use ajax to generate outfit/scroll through options without having to refresh page
+    #ex: keyword: hiking -- want a top with keyword clothing
+
+    #make a list of lists, does random for each list and then creates a list of it's choices -- list comp
+    
+
+    tops = db.session.query(Articles).join(ClothingKeyword).filter(ClothingKeyword.keyword_id==activity,
+                                                                  Articles.category_id=='tops').all()
+    bottoms = db.session.query(Articles).join(ClothingKeyword).filter(ClothingKeyword.keyword_id==activity,
+                                                                  Articles.category_id=='bottoms').all()
+    jackets = db.session.query(Articles).join(ClothingKeyword).filter(Articles.category_id=='jackets').all()
+    top = random.choice(tops).url
+    bottom = random.choice(bottoms).url
+    jacket = random.choice(jackets).url
+ 
+
+    return render_template("outfit.html", temp=temp['temp'], top=top, bottom=bottom, 
+                           jacket=jacket, activity=activity)
 
 
 @app.route("/closet")
 def show_closet():
     """Show's user what items they have in their closet."""
 
-    #sorts by category 
-    #make list and iterate and append to dictionary
-    #pass dictionary in
+    #want: sorts by keywords 
 
-    # categories = 'tops bottoms dresses'.split() #make global list
-    # clothes = {
-    #     category: Articles.query.filter(Articles.category_id==category).all()
-    #     for category in categories
-    # }
-    # return render_template("closet.html", **clothes)
-
-    tops = Articles.query.filter(Articles.category_id=='tops').all()
-    bottoms = Articles.query.filter(Articles.category_id=='bottoms').all()
-    dresses = Articles.query.filter(Articles.category_id=='dresses').all()
-    jackets = Articles.query.filter(Articles.category_id=='jackets').all()
-    lounge = Articles.query.filter(Articles.category_id=='lounge').all()
-    swim = Articles.query.filter(Articles.category_id=='swim').all()
-    active = Articles.query.filter(Articles.category_id=='active').all()
-    accessories = Articles.query.filter(Articles.category_id=='accessories').all()
-    shoes = Articles.query.filter(Articles.category_id=='shoes').all()
-
-    return render_template("closet.html", tops=tops, bottoms=bottoms, dresses=dresses,
-                                          jackets=jackets, lounge=lounge, swim=swim,
-                                          active=active, accessories=accessories, shoes=shoes)
-    #have a view that sorts by keywords
+    #make list and iterate and append to dictionary pass dictionary in
+    clothes = {
+        category: Articles.query.filter(Articles.category_id==category, Articles.username==session['username']).all()
+        for category in categories
+    }
+    return render_template("closet.html", **clothes)
 
 
 if __name__ == "__main__":

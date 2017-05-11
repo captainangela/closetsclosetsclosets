@@ -41,6 +41,8 @@ class Articles(db.Model):
     description = db.Column(db.String(400), nullable=False)
     url = db.Column(db.String(200), nullable=False)
 
+    clk = db.relationship("ClothingKeyword", backref="articles") 
+
     def __repr__(self):
         """Provide helpful representation when printed."""
 
