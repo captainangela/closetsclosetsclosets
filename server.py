@@ -9,7 +9,16 @@ from model import connect_to_db, db, Users, Articles, Category, Keyword, Clothin
 
 import hashlib, pyowm, random
 
+
+
 categories = 'tops bottoms dresses jackets lounge swim active accessories shoes'.split()
+
+# category = Category.query.all()
+# categories = []
+# for cat in category:
+#     categories.append(cat.category_id)
+
+
 app = Flask(__name__)
 
 # Required to use Flask sessions and the debug toolbar
@@ -19,6 +28,20 @@ app.secret_key = "mynameisangelahaha"
 # This is horrible. Fix this so that, instead, it raises an error.
 app.jinja_env.undefined = StrictUndefined
 
+def get_weather():
+    """Get weather."""
+    owm = pyowm.OWM('bad06f5e17057b9e7b8ad4bbee71b22e')
+
+    user = Users.query.get(session["username"])
+    zipcode = user.zipcode
+
+    #get weather for zipcode entered -- should this be in an outside function?
+    observation = owm.weather_at_place(zipcode)
+    weather = observation.get_weather()
+    temp = weather.get_temperature('fahrenheit')
+    status = weather._status
+    
+    return temp, status
 
 @app.route('/')
 def index():
@@ -90,6 +113,10 @@ def login_process():
         return redirect("/login")
 
     session["username"] = user.username
+    session["temp"] = get_weather()[0]["temp"]
+    session["status"] = get_weather()[1]
+
+    print session["status"]
 
     flash("Logged in")
     return redirect("/users")
@@ -112,7 +139,9 @@ def user_detail():
     username = session['username']
     #print session
     user = Users.query.get(username)
-    
+
+    print get_weather()
+   
     return render_template("user.html", user=user)
 
 
@@ -135,7 +164,8 @@ def add_clothes():
     #import pdb; pdb.set_trace()
 
     #create new article of clothing in closets
-    new_clothing = Articles(username=session['username'], category_id=category_id, description=description, url=url)
+    new_clothing = Articles(username=session['username'], category_id=category_id, 
+                            description=description, url=url)
 
     #adds article of clothing to database
     db.session.add(new_clothing)
@@ -166,8 +196,15 @@ def enter_outfit_details():
     #javascript dependent menus
 
     #add suggestions for clothes on the web that you can buy
+    activities = ["urban hike", "dinner", "brunch", "workout", "concert", "girls night out",
+                  "hiking", "casual date", "stay at home", "beach", "picnic", "date night", "pool"] 
 
-    return render_template("outfit_details.html")
+    select_string = "<select name='activity'><option value='' disabled selected>Choose one</option>" 
+    for activity in activities:
+        select_string = select_string + "<option value='%s'>%s</option><br>" % (activity, activity)
+    select_string = select_string + "</select>"
+
+    return render_template("outfit_details.html", select_string=select_string)
 
 
 @app.route("/outfit_generated", methods=['POST'])
@@ -186,20 +223,39 @@ def get_random_outfit():
     #ex: keyword: hiking -- want a top with keyword clothing
 
     #make a list of lists, does random for each list and then creates a list of it's choices -- list comp
-    
+
 
     tops = db.session.query(Articles).join(ClothingKeyword).filter(ClothingKeyword.keyword_id==activity,
                                                                   Articles.category_id=='tops').all()
     bottoms = db.session.query(Articles).join(ClothingKeyword).filter(ClothingKeyword.keyword_id==activity,
                                                                   Articles.category_id=='bottoms').all()
     jackets = db.session.query(Articles).join(ClothingKeyword).filter(Articles.category_id=='jackets').all()
-    top = random.choice(tops).url
+    dresses = db.session.query(Articles).join(ClothingKeyword).filter(ClothingKeyword.keyword_id==activity,
+                                                                  Articles.category_id=='dresses').all()
+
+    tops_list = {}
+    bottoms_list = []
+    jackets_list = []
+
+    for to in tops:
+       tops_list[to.url] = to.category_id
+
+    for botto in bottoms:
+        bottoms_list.append(botto.url)
+
+    for jacke in jackets:
+        jackets_list.append(jacke.url)
+
+    for dress in dresses:
+        tops_list[dress.url] = dress.category_id
+
+
+    top = random.choice(tops_list.items())
     bottom = random.choice(bottoms).url
     jacket = random.choice(jackets).url
- 
 
-    return render_template("outfit.html", temp=temp['temp'], top=top, bottom=bottom, 
-                           jacket=jacket, activity=activity)
+    return render_template("outfit.html", temp=temp['temp'], top=top, bottom=bottom, dress=dress,
+                           jacket=jacket, activity=activity, tops_list=tops_list, bottoms_list=bottoms_list)
 
 
 @app.route("/closet")
@@ -210,15 +266,24 @@ def show_closet():
 
     #make list and iterate and append to dictionary pass dictionary in
     clothes = {
-        category: Articles.query.filter(Articles.category_id==category, Articles.username==session['username']).all()
+        category: Articles.query.filter(Articles.category_id==category, 
+                                         Articles.username==session['username']).all()
         for category in categories
     }
     return render_template("closet.html", **clothes)
 
 
+
+@app.route("/favorites")
+def show_favorite_outfits():
+    """Show's users favorited outfits."""
+
+    pass
+
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point
     # that we invoke the DebugToolbarExtension
+
     app.debug = True
 
     connect_to_db(app)
@@ -227,3 +292,5 @@ if __name__ == "__main__":
     DebugToolbarExtension(app)
 
     app.run(host="0.0.0.0")
+
+

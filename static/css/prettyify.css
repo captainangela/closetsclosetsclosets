@@ -12,3 +12,40 @@
 	height: 200px;
     width: 200px;
 }
+
+.dresses{
+	height: 250px;
+    width: 200px;
+}
+
+.swim{
+	height: 200px;
+    width: 200px;
+}
+
+.lounge{
+	height: 250px;
+    width: 200px;
+}
+
+.active{
+	height: 200px;
+    width: 200px;
+}
+
+.accessory{
+	height: 200px;
+    width: 200px;
+}
+
+.shoes{
+	height: 200px;
+    width: 200px;
+}
+
+#closetbackground{
+    background-repeat: no-repeat;
+    background-size: contain, auto;
+    background-attachment: fixed;
+    background-position: center; 
+}

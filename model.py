@@ -89,6 +89,17 @@ class ClothingKeyword(db.Model):
         return "<Category= %s, Keyword=%s>" % (self.category_id, self.keyword_id)
 
 
+class Favorites(db.Model):
+    """Users's favorite outfits."""
+
+    __tablename__ = "favorites"
+
+    favorite_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    top = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
+    bottom = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
+    jacket = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
+
+
 
 ##############################################################################
 # Helper functions

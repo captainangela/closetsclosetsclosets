@@ -1,51 +1,39 @@
 {% extends 'base.html' %}
 {% block content %}
 
+
+<body id="closetbackground" background="static/img/closet.png"> 
+
  <h1>Your closet!</h1>
  	
  <h3>Tops:
 	 {% for top in tops %}
-	 	<img src="{{top.url}}">
+	 	<img class="top" src="{{top.url}}">
 	 {% endfor %}
 
  <h3>Bottoms:
 	 {% for bottom in bottoms %}
-	 	<img src="{{bottom.url}}">
+	 	<img class="bottom" src="{{bottom.url}}">
 	 {% endfor %}
 
  <h3>Dresses:
 	 {% for dress in dresses %}
-	 	<img src="{{dress.url}}">
+	 	<img class="dresses" src="{{dress.url}}">
 	 {% endfor %}
 
  <h3>Jackets:
 	 {% for jacket in jackets %}
-	 	<img src="{{jacket.url}}">
-	 {% endfor %}
-
- <h3>Lounge:
-	 {% for loung in lounge %}
-	 	<img src="{{loung.url}}">
-	 {% endfor %}
-
- <h3>Swim:
-	 {% for swam in swim %}
-	 	<img src="{{swam.url}}">
-	 {% endfor %}
-
- <h3>Active:
-	 {% for activ in active %}
-	 	<img src="{{activ.url}}">
+	 	<img class="jackets" src="{{jacket.url}}">
 	 {% endfor %}
 
  <h3>Accessories:
 	 {% for accessory in accessories %}
-	 	<img src="{{accessory.url}}">
+	 	<img class="accessory" src="{{accessory.url}}">
 	 {% endfor %}
 
 <h3>Shoes:
 	 {% for shoe in shoes %}
-	 	<img src="{{shoe.url}}">
+	 	<img class="shoes" src="{{shoe.url}}">
 	 {% endfor %}
 
   <br>

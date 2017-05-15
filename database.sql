@@ -48,9 +48,6 @@ VALUES ('tops'),
 ('bottoms'),
 ('dresses'),
 ('jackets'),
-('lounge'),
-('swim'),
-('active'),
 ('accessories'),
 ('shoes');
 
@@ -85,10 +82,14 @@ INSERT INTO articles (username, category_id, description, url) VALUES
 ('captainangela', 'tops', 'grey sweatshirt', 'https://s-media-cache-ak0.pinimg.com/736x/5f/78/46/5f7846258ab336146214fa1019217dad.jpg'),
 ('captainangela', 'bottoms', 'yoga pants', 'https://photos.cdn-outlet.com/photos/options/8141421-51837-1A-zoomin.jpg'),
 ('captainangela', 'jackets', 'leather jacket', 'https://static.zara.net/photos///2017/V/0/1/p/5479/241/800/3/w/560/5479241800_6_1_1.jpg?ts=1468842909156'),
-('captainangela', 'lounge', 'sweatpants', 'https://uniqlo.scene7.com/is/image/UNIQLO/goods_03_183508?$prod$'),
-('captainangela', 'swim', 'one piece swimsuit', 'https://cdn.shopify.com/s/files/1/0077/0432/products/Oasis-Prod-FrontBackjpg_720x720.jpg?v=1490899379'),
+('captainangela', 'bottoms', 'sweatpants', 'https://uniqlo.scene7.com/is/image/UNIQLO/goods_03_183508?$prod$'),
+('captainangela', 'dresses', 'one piece swimsuit', 'https://cdn.shopify.com/s/files/1/0077/0432/products/Oasis-Prod-FrontBackjpg_720x720.jpg?v=1490899379'),
 ('captainangela', 'bottoms', 'black skinny jeans', 'https://s-media-cache-ak0.pinimg.com/736x/8d/f3/65/8df365c6582de260011d84495e8a1a65.jpg'),
-('captainangela', 'shoes', 'christian louboutin neon pumps', 'http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=51751607');
+('captainangela', 'shoes', 'christian louboutin neon pumps', 'http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=51751607'),
+('captainangela', 'tops', 'sports bra', 'http://s7d2.scene7.com/is/image/dkscdn/16NIKWPRCLSSCPDDDAPUA_Lt_Crimson_Brigh_Mandarin/?$DSG_ProductCard$'),
+('captainangela', 'dresses', 'backless dress', 'https://s-media-cache-ak0.pinimg.com/736x/c9/17/2d/c9172d5dbc92d8aa7cc9a0a7c644199f.jpg'),
+('captainangela', 'accessories', 'long necklace', 'http://demandware.edgesuite.net/bbkx_prd/on/demandware.static/-/Sites-kendrascott/default/dw69254b15/jewelry/seasonal/summer-2017/kacey/842177147313_00_default_lg.jpg'),
+('captainangela', 'accessories', 'stud earrings', 'https://images-na.ssl-images-amazon.com/images/G/01/Shopbop/p/prod/products/madew/madew4237962466/madew4237962466_q1_2-0._QL90_UX336_.jpg');
 
 -- Insert association
 
@@ -136,8 +137,31 @@ VALUES (1, 'dinner'),
 (9, 'spring'),
 (9, 'urban hike'),
 (10, 'girls night out'),
-(10, 'date night');
-
+(10, 'date night'),
+(11, 'workout'),
+(11, 'hiking'),
+(12, 'date night'),
+(12, 'girls night out'),
+(13, 'spring'),
+(13, 'summer'),
+(13, 'fall'),
+(13, 'winter'),
+(13, 'dinner'),
+(13, 'brunch'),
+(13, 'concert'),
+(13, 'girls night out'),
+(13, 'casual date'),
+(13, 'date night'),
+(14, 'fall'),
+(14, 'winter'),
+(14, 'dinner'),
+(14, 'brunch'),
+(14, 'concert'),
+(14, 'girls night out'),
+(14, 'casual date'),
+(14, 'date night'),
+(14, 'spring'),
+(14, 'summer');
 
 
 
