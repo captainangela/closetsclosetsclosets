@@ -9,6 +9,9 @@
  <h3>Tops:
 	 {% for top in tops %}
 	 	<img class="top" src="{{top.url}}">
+	 	{% for c in top.clk %}
+	 		<span>{{ c.keyword_id }}</span>
+	 	{% endfor %}
 	 {% endfor %}
 
  <h3>Bottoms:
@@ -35,6 +38,7 @@
 	 {% for shoe in shoes %}
 	 	<img class="shoes" src="{{shoe.url}}">
 	 {% endfor %}
+
 
   <br>
   <br>

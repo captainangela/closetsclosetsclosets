@@ -19,12 +19,10 @@ the weather is {{ temp }} <br>
 <br>
 
 <div>
-  <button id="backtop">Back</button> 
   <img id="tops" class="top" src="{{ top[0] }}">
   <button id="changetop">Next</button> 
 </div>
 <div>
-  <button id="backbottom">Back</button> 
   <img id="bottoms" class="bottom" src="{{ bottom }}">
   <button id="changebottom">Next</button> 
 </div>  
@@ -33,18 +31,17 @@ the weather is {{ temp }} <br>
 </div>
 
 
-
-
 <script>
   var temp = {{ temp }}
 
+  //if temperature is colder tha 65 degrees, show add jacket button
   if (temp < 65){
     document.getElementById('addjacket').style.visibility="visible";
   }
   else{
     document.getElementById('addjacket').style.visibility="hidden";
   }
-
+  //add jacket button will show a random jacket to add to outfit
   var jacketbutton = document.getElementById('addjacket');
   function addJacket(){
     document.getElementById('jacket').style.display="inline";
@@ -52,12 +49,31 @@ the weather is {{ temp }} <br>
   jacketbutton.addEventListener('click', addJacket);
 
 
+  //clicking next button will choose another random top
+  var topsbutton = document.getElementById('changetop');
+  topsbutton.addEventListener('click', ()=>{
+    // MAKE AJAX CALL TO GET URL OF BOTTOM FOR ACTIVITY
+    $.get('/get_random_article/{{activity}}/tops', function(data, status) {
+      console.log('data',data);
+      // GET THE URL FROM RESPONSE
+      var url = data;
+      // SET THE SOURCE FOR THE BOTTOMS IMAGE BE THE URL RETURNEDJUST NOW
+      $('#tops').attr('src', url);
+    });
+  });
+
+  //clicking next button will choose another random bottom
   var bottomsbutton = document.getElementById('changebottom');
-  function changeBottom(){
-    $('#bottoms').attr('src', "http://www.childrensplace.com/wcsstore/GlobalSAS/images/tcp/products/380/2065376_1228.jpg");
-  }
-  
-  bottomsbutton.addEventListener('click', changeBottom);
+  bottomsbutton.addEventListener('click', ()=>{
+    // MAKE AJAX CALL TO GET URL OF BOTTOM FOR ACTIVITY
+    $.get('/get_random_article/{{activity}}/bottoms', function(data, status) {
+      console.log('data',data);
+      // GET THE URL FROM RESPONSE
+      var url = data;
+      // SET THE SOURCE FOR THE BOTTOMS IMAGE BE THE URL RETURNEDJUST NOW
+      $('#bottoms').attr('src', url);
+    });
+  });
 
 
   var cat_id = "{{ top[1] }}";

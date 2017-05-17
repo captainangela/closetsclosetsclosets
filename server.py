@@ -11,7 +11,7 @@ import hashlib, pyowm, random
 
 
 
-categories = 'tops bottoms dresses jackets lounge swim active accessories shoes'.split()
+categories = 'tops bottoms dresses jackets accessories shoes'.split()
 
 # category = Category.query.all()
 # categories = []
@@ -223,8 +223,6 @@ def get_random_outfit():
     #ex: keyword: hiking -- want a top with keyword clothing
 
     #make a list of lists, does random for each list and then creates a list of it's choices -- list comp
-
-
     tops = db.session.query(Articles).join(ClothingKeyword).filter(ClothingKeyword.keyword_id==activity,
                                                                   Articles.category_id=='tops').all()
     bottoms = db.session.query(Articles).join(ClothingKeyword).filter(ClothingKeyword.keyword_id==activity,
@@ -254,8 +252,23 @@ def get_random_outfit():
     bottom = random.choice(bottoms).url
     jacket = random.choice(jackets).url
 
+    # print bottoms
+    # print bottoms_list
+
     return render_template("outfit.html", temp=temp['temp'], top=top, bottom=bottom, dress=dress,
-                           jacket=jacket, activity=activity, tops_list=tops_list, bottoms_list=bottoms_list)
+                           jacket=jacket, activity=activity, bottoms=bottoms, bottoms_list=bottoms_list)
+
+
+@app.route('/get_random_article/<activity>/<category>')
+def get_another_random(activity, category):
+    """Get's more random articles of clothing so user can scroll through outfit."""
+
+
+    article = random.choice(db.session.query(Articles).join(ClothingKeyword).filter(ClothingKeyword.keyword_id==activity, 
+                                                                      Articles.category_id==category).all())
+    #create function to use ajax to get another random article of clothing
+    return article.url
+
 
 
 @app.route("/closet")
@@ -264,14 +277,31 @@ def show_closet():
 
     #want: sorts by keywords 
 
-    #make list and iterate and append to dictionary pass dictionary in
-    clothes = {
+    #dictionary of categories and the articles of clothing associated with them
+    closet = {
         category: Articles.query.filter(Articles.category_id==category, 
-                                         Articles.username==session['username']).all()
+                                        Articles.username==session['username']).all()
         for category in categories
     }
-    return render_template("closet.html", **clothes)
+    # import pprint
+    # pprint.pprint(closet)
 
+    # #make list of clothing_ids, create dictionary with clothing_id as key and keywords as values
+    # clothing_ids = Articles.query.filter(Articles.username==session['username']).all()
+    # list_ids = []
+
+    # for clothid in clothing_ids:
+    #     list_ids.append(clothid.clothing_id)
+
+    # articles = {
+    #     clothing_id: ClothingKeyword.query.filter(ClothingKeyword.clothing_id==clothing_id).all()
+                                         
+    #     for clothing_id in list_ids
+    # }
+
+    # pprint.pprint(articles)
+
+    return render_template("closet.html", **closet)
 
 
 @app.route("/favorites")

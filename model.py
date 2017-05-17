@@ -86,7 +86,7 @@ class ClothingKeyword(db.Model):
     def __repr__(self):
         """Provide helpful representation when printed."""
 
-        return "<Category= %s, Keyword=%s>" % (self.category_id, self.keyword_id)
+        return "<Clothing= %s, Keyword=%s>" % (self.clothing_id, self.keyword_id)
 
 
 class Favorites(db.Model):
@@ -98,8 +98,21 @@ class Favorites(db.Model):
     top = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
     bottom = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
     jacket = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
+    accessory = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
+    shoes = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
 
 
+class PastOutfits(db.Model):
+    """Users's past outfits."""
+
+    __tablename__ = "oldoutfits"
+
+    favorite_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    top = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
+    bottom = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
+    jacket = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
+    accessory = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
+    shoes = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
 
 ##############################################################################
 # Helper functions

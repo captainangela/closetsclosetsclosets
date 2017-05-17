@@ -20,12 +20,14 @@ Clothets
 	    {{ session["temp"] }}℉ and 
 	    	{% if session["status"] == "Haze" %}
 	    		⛅️
-	    	{% elif session["status"] == "clouds" %}
+	    	{% elif session["status"] == "Clouds" %}
 	    		☁️
-	    	{% elif session["status"] == "clouds" %}
+	    	{% elif session["status"] == "Clear" %}
 	    		☀️
-	    	{% else %}
+	    	{% elif session["status"] == "Rain" %}
 	    		☔️
+	    	{% else %}
+	    		☀️
 	    	{% endif %}
 	{% endif %}
 </div>	
