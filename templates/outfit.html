@@ -10,26 +10,36 @@ the weather is {{ temp }} <br>
 {% else %}
   It's warm out! You don't need a jacket today.
 {% endif %}
+<div align="center">
+  <br>
+  <script src="https://code.jquery.com/jquery.js"></script>
 
-<br>
-<script src="https://code.jquery.com/jquery.js"></script>
+  <h2>Your outfit for <i>{{ activity }}</i>:</h2><br>
+  <button id="addjacket">Add Jacket</button>
+  <br>
 
-<h2>Your outfit for <i>{{ activity }}</i>:</h2><br>
-<button id="addjacket">Add a Jacket!</button>
-<br>
-
+  <div>
+    {% if top == None %}
+      You don't have any tops for this occasion!
+    {% else %}
+      <img id="tops" class="top" src="{{ top }}">
+    {% endif %}
+    <button id="changetop">Next</button> 
+  </div>
+  <div>
+    <img id="bottoms" class="bottom" src="{{ bottom }}">
+    <button id="changebottom">Next</button> 
+  </div>  
+  <div>
+    <img id="jacket" class="jackets" src="{{ jacket }}" style="display: none;">
+  </div>
+  <div>
+    <button id="addAccessory">Add Accessory</button> 
+  </div>  
+  <div>
+    <button id="addShoes">Add Shoes</button> 
+  </div>  
 <div>
-  <img id="tops" class="top" src="{{ top[0] }}">
-  <button id="changetop">Next</button> 
-</div>
-<div>
-  <img id="bottoms" class="bottom" src="{{ bottom }}">
-  <button id="changebottom">Next</button> 
-</div>  
-<div>
-  <img id="jacket" class="jackets" src="{{ jacket }}" style="display: none;">
-</div>
-
 
 <script>
   var temp = {{ temp }}
@@ -75,8 +85,10 @@ the weather is {{ temp }} <br>
     });
   });
 
-
-  var cat_id = "{{ top[1] }}";
+  var tops = {{ top|tojson|safe }};
+  if (tops !== null){
+    var cat_id = tops[1];
+  }
   if (cat_id == 'dresses'){
     document.getElementById('bottoms').style.visibility="hidden";
     document.getElementById('backbottom').style.visibility="hidden";

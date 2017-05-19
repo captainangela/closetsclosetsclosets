@@ -1,0 +1,26 @@
+ clothing_id |   username    | category_id |       description        |                                                                            url                                                                            
+-------------+---------------+-------------+--------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+           1 | captainangela | bottoms     | Blue Jeans               | http://static.lindex.com/Archive/ProductImages/7035/7035006/S0000007071004_F_W40_20131129134203.png
+           2 | captainangela | tops        | plain grey sweater       | http://www.teerabbit.com/product_view_image/s/image/4/468/353/sportgrey.png?1441067253
+           3 | captainangela | bottoms     | black jeggings           | http://www.olsen.co.uk/out/pictures/master/product/1/14000007-80000_1.png
+           4 | captainangela | bottoms     | grey yoga pants          | http://blog.theclymb.com/wp-content/uploads/2013/09/lucy-lotus-pant.png
+           5 | captainangela | tops        | grey worded tank top     |  http://cdn.shopify.com/s/files/1/0236/0293/products/1_appearanceId_164_width_350_height_350_6ed10627-4720-4451-9c5d-d6052414c747_grande.png?v=1494367772
+           6 | captainangela | tops        | white tshirt with pocket | http://cdn.shopify.com/s/files/1/0226/0157/products/pocket-tee-ashley-womens-001_large.png?v=1433832419
+           7 | captainangela | tops        | icelandic sweater        | https://cdn.shopify.com/s/files/1/0790/7429/products/f89941-020-ovik-knit-sweater-w_53617f64-5bb8-4bbd-85c0-f9f3c4ce50a5_grande.png?v=1488861365
+           8 | captainangela | dresses     | pink polka dot dress     | http://www.stickpng.com/assets/thumbs/580b57fbd9996e24bc43bef7.png
+           9 | captainangela | jackets     | leather jacket           | https://ivoryleathers.com/media/wysiwyg/womens-leather-motorcycle-jacket.png
+          10 | captainangela | jackets     | peacoat                  | http://www.buzzricksons.com/images/product/Peacoat.png
+          11 | captainangela | jackets     | jean jacket              | http://myfashionwants.com/wp-content/uploads/2014/06/cropped-jean-jacket-from-Citizens-of-Humanity.png
+          12 | captainangela | shoes       | yellow heels             | https://img.clipartfest.com/16a3d0cfd4d272c1ea32eed332d3b0ef_yellow-women-shoes-png-image-ladies-shoes-clipart-png_1407-1248.png
+          13 | captainangela | shoes       | running shoes            | http://www.pngall.com/wp-content/uploads/2016/04/Running-Shoes-PNG-File.png
+          14 | captainangela | shoes       | black converse           | https://userscontent2.emaze.com/images/5b64e6f4-18d8-4007-b723-d220a09c6b52/94b0f4423c415805f6aff7e39b5cbef9.png
+          15 | captainangela | dresses     | blue dress               | http://www.stickpng.com/assets/thumbs/580b57fbd9996e24bc43bef1.png
+          16 | captainangela | accessories | green longchamp          | http://www.stickpng.com/assets/thumbs/5864f8797d90850fc3ce2a14.png
+          17 | captainangela | tops        | black dressshirt         | http://www.stickpng.com/assets/thumbs/580b57fbd9996e24bc43bf55.png
+          18 | captainangela | bottoms     | black pleather skirt     | http://www.stickpng.com/assets/thumbs/580b57fbd9996e24bc43bf65.png
+          19 | captainangela | tops        | nike sweatshirt          | http://www.stickpng.com/assets/thumbs/58e38d00204d556bbd97b162.png
+          20 | captainangela | bottoms     | jean shorts              | http://www.stickpng.com/assets/thumbs/580b57fbd9996e24bc43bf39.png
+          21 | captainangela | tops        | striped crop tshirt      | https://s-media-cache-ak0.pinimg.com/originals/ce/40/1e/ce401e1dd6906d65c79f254ed1d3c371.png
+          22 | captainangela | tops        | Boobie tshirt            | http://gloimg.zaful.com/zaful/pdm-product-pic/Clothing/2017/02/09/thumb-img/1486596367148544257.jpg
+(22 rows)
+

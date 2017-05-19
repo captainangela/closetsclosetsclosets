@@ -7,36 +7,93 @@
  <h1>Your closet!</h1>
  	
  <h3>Tops:
-	 {% for top in tops %}
-	 	<img class="top" src="{{top.url}}">
-	 	{% for c in top.clk %}
-	 		<span>{{ c.keyword_id }}</span>
-	 	{% endfor %}
+	{% for top in tops %}
+	<div class="container">
+	 	<img class="top" src="{{top.url}}" class="image">
+	 	<div class="middle">
+    		<div class="text">
+    		{{ top.description }}
+    		{% for c in top.clk %}
+			<ul> 👚 &nbsp; {{c.keyword_id}} </ul>
+	 		{% endfor %}
+    		</div>
+  		</div>
+  	</div>		
 	 {% endfor %}
 
  <h3>Bottoms:
 	 {% for bottom in bottoms %}
-	 	<img class="bottom" src="{{bottom.url}}">
+	 	<div class="container">
+	 	<img class="top" src="{{bottom.url}}" class="image">
+	 	<div class="middle">
+    		<div class="text">
+    		{{ bottom.description }}
+    		{% for c in bottom.clk %}
+			<ul>👖 &nbsp; {{c.keyword_id}}</ul>
+	 		{% endfor %}
+    		</div>
+  		</div>
+  	</div>		
 	 {% endfor %}
 
  <h3>Dresses:
 	 {% for dress in dresses %}
-	 	<img class="dresses" src="{{dress.url}}">
+	 	<div class="container">
+	 	<img class="top" src="{{dress.url}}" class="image">
+	 	<div class="middle">
+    		<div class="text">
+    		{{ dress.description }}
+    		{% for c in dress.clk %}
+			<ul>👗 &nbsp; {{c.keyword_id}}</ul>
+	 		{% endfor %}
+    		</div>
+  		</div>
+  	</div>		
 	 {% endfor %}
 
  <h3>Jackets:
 	 {% for jacket in jackets %}
-	 	<img class="jackets" src="{{jacket.url}}">
+	 	<div class="container">
+	 	<img class="top" src="{{jacket.url}}" class="image">
+	 	<div class="middle">
+    		<div class="text">
+    		{{ jacket.description }}
+    		{% for c in jacket.clk %}
+			<ul>❄ &nbsp; {{c.keyword_id}}</ul>
+	 		{% endfor %}
+    		</div>
+  		</div>
+  	</div>		
 	 {% endfor %}
 
  <h3>Accessories:
 	 {% for accessory in accessories %}
-	 	<img class="accessory" src="{{accessory.url}}">
+	 	<div class="container">
+	 	<img class="top" src="{{accessory.url}}" class="image">
+	 	<div class="middle">
+    		<div class="text">
+    		{{ accessory.description }}
+    		{% for c in accessory.clk %}
+			<ul>👓 &nbsp; {{c.keyword_id}}</ul>
+	 		{% endfor %}
+    		</div>
+  		</div>
+  	</div>		
 	 {% endfor %}
 
 <h3>Shoes:
 	 {% for shoe in shoes %}
-	 	<img class="shoes" src="{{shoe.url}}">
+	 	<div class="container">
+	 	<img class="top" src="{{shoe.url}}" class="image">
+	 	<div class="middle">
+    		<div class="text">
+    		{{ shoe.description }}
+    		{% for c in shoe.clk %}
+			<ul>👠 &nbsp; {{c.keyword_id}}</ul>
+	 		{% endfor %}
+    		</div>
+  		</div>
+  	</div>		
 	 {% endfor %}
 
 

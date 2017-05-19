@@ -223,40 +223,67 @@ def get_random_outfit():
     #ex: keyword: hiking -- want a top with keyword clothing
 
     #make a list of lists, does random for each list and then creates a list of it's choices -- list comp
-    tops = db.session.query(Articles).join(ClothingKeyword).filter(ClothingKeyword.keyword_id==activity,
-                                                                  Articles.category_id=='tops').all()
-    bottoms = db.session.query(Articles).join(ClothingKeyword).filter(ClothingKeyword.keyword_id==activity,
-                                                                  Articles.category_id=='bottoms').all()
-    jackets = db.session.query(Articles).join(ClothingKeyword).filter(Articles.category_id=='jackets').all()
-    dresses = db.session.query(Articles).join(ClothingKeyword).filter(ClothingKeyword.keyword_id==activity,
-                                                                  Articles.category_id=='dresses').all()
+    # tops = db.session.query(Articles).join(ClothingKeyword).filter(ClothingKeyword.keyword_id==activity,
+    #                                                               Articles.category_id=='tops').all()
+    # bottoms = db.session.query(Articles).join(ClothingKeyword).filter(ClothingKeyword.keyword_id==activity,
+    #                                                               Articles.category_id=='bottoms').all()
+    # jackets = db.session.query(Articles).join(ClothingKeyword).filter(Articles.category_id=='jackets').all()
+    # dresses = db.session.query(Articles).join(ClothingKeyword).filter(ClothingKeyword.keyword_id==activity,
+    #                                                               Articles.category_id=='dresses').all()
+    # accessories = db.session.query(Articles).join(ClothingKeyword).filter(ClothingKeyword.keyword_id==activity,
+    #                                                               Articles.category_id=='accessories').all()
+    # shoes = db.session.query(Articles).join(ClothingKeyword).filter(ClothingKeyword.keyword_id==activity,
+    #                                                               Articles.category_id=='shoes').all()
+    
+    clothing_dictionary = {}
+    for category in categories:
+        cat = db.session.query(Articles).join(ClothingKeyword).filter(ClothingKeyword.keyword_id==activity,
+                                                                  Articles.category_id==category).all()
+        if cat == []:
+            clothing_dictionary[category] = None
+        else:
+            clothing_dictionary[category] = random.choice(cat).url
+        
 
-    tops_list = {}
-    bottoms_list = []
-    jackets_list = []
+    # tops_dict = {}
+    # bottoms_list = []
+    # jackets_list = []
+    # accessories_list = []
+    # shoes = []
 
-    for to in tops:
-       tops_list[to.url] = to.category_id
+    # for top in tops:
+    #    tops_dict[top.url] = top.category_id
 
-    for botto in bottoms:
-        bottoms_list.append(botto.url)
+    # for bottom in bottoms:
+    #     bottoms_list.append(bottom.url)
 
-    for jacke in jackets:
-        jackets_list.append(jacke.url)
+    # for jacket in jackets:
+    #     jackets_list.append(jacket.url)
 
-    for dress in dresses:
-        tops_list[dress.url] = dress.category_id
+    # for dress in dresses:
+    #     tops_dict[dress.url] = dress.category_id
+
+    # for accessory in accessories:
+    #     accessories_list.append(accessory.url)
+
+    # for shoe in shoes:
+    #     shoes_list.append(shoe.url)
 
 
-    top = random.choice(tops_list.items())
-    bottom = random.choice(bottoms).url
-    jacket = random.choice(jackets).url
+    # # print tops_dict 
 
-    # print bottoms
+    # if tops_dict == {}:
+    #     top = None
+    # else:    
+    #     top = random.choice(tops_dict.items())
+    # bottom = random.choice(bottoms).url
+    # jacket = random.choice(jackets).url
+
+    # print top
     # print bottoms_list
 
-    return render_template("outfit.html", temp=temp['temp'], top=top, bottom=bottom, dress=dress,
-                           jacket=jacket, activity=activity, bottoms=bottoms, bottoms_list=bottoms_list)
+    return render_template("outfit.html", temp=temp['temp'], top=clothing_dictionary['tops'], bottom=clothing_dictionary['bottoms'], jacket=clothing_dictionary['jackets'], 
+                           activity=activity)
 
 
 @app.route('/get_random_article/<activity>/<category>')
@@ -283,23 +310,6 @@ def show_closet():
                                         Articles.username==session['username']).all()
         for category in categories
     }
-    # import pprint
-    # pprint.pprint(closet)
-
-    # #make list of clothing_ids, create dictionary with clothing_id as key and keywords as values
-    # clothing_ids = Articles.query.filter(Articles.username==session['username']).all()
-    # list_ids = []
-
-    # for clothid in clothing_ids:
-    #     list_ids.append(clothid.clothing_id)
-
-    # articles = {
-    #     clothing_id: ClothingKeyword.query.filter(ClothingKeyword.clothing_id==clothing_id).all()
-                                         
-    #     for clothing_id in list_ids
-    # }
-
-    # pprint.pprint(articles)
 
     return render_template("closet.html", **closet)
 
