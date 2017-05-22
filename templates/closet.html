@@ -16,6 +16,7 @@
     		{% for c in top.clk %}
 			<ul> 👚 &nbsp; {{c.keyword_id}} </ul>
 	 		{% endfor %}
+	 		<button data-clothing="{{ top.clothing_id }}" class="delbutton">Remove</button>
     		</div>
   		</div>
   	</div>		
@@ -31,6 +32,7 @@
     		{% for c in bottom.clk %}
 			<ul>👖 &nbsp; {{c.keyword_id}}</ul>
 	 		{% endfor %}
+	 		<button data-clothing="{{ bottom.clothing_id }}" class="delbutton">Remove</button>
     		</div>
   		</div>
   	</div>		
@@ -46,6 +48,7 @@
     		{% for c in dress.clk %}
 			<ul>👗 &nbsp; {{c.keyword_id}}</ul>
 	 		{% endfor %}
+	 		<button data-clothing="{{ dress.clothing_id }}" class="delbutton">Remove</button>
     		</div>
   		</div>
   	</div>		
@@ -61,6 +64,7 @@
     		{% for c in jacket.clk %}
 			<ul>❄ &nbsp; {{c.keyword_id}}</ul>
 	 		{% endfor %}
+	 		<button data-clothing="{{ jacket.clothing_id }}" class="delbutton">Remove</button>
     		</div>
   		</div>
   	</div>		
@@ -76,6 +80,7 @@
     		{% for c in accessory.clk %}
 			<ul>👓 &nbsp; {{c.keyword_id}}</ul>
 	 		{% endfor %}
+	 		<button data-clothing="{{ accessory.clothing_id }}" class="delbutton">Remove</button>
     		</div>
   		</div>
   	</div>		
@@ -91,6 +96,7 @@
     		{% for c in shoe.clk %}
 			<ul>👠 &nbsp; {{c.keyword_id}}</ul>
 	 		{% endfor %}
+	 		<button data-clothing="{{ shoe.clothing_id }}" class="delbutton">Remove</button> 
     		</div>
   		</div>
   	</div>		
@@ -101,5 +107,23 @@
   <br>
   <a href="/users">Back to homepage</a>
   </h2>
+
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script type="text/javascript" >
+        $(function() {
+            $(".delbutton").click(function() {
+                var del_id = $(this).data("clothing");
+                console.log(del_id)
+                var data = {'del_id': del_id}
+                    $.ajax({
+                        type : "POST",
+                        url : "/delete_clothes",
+                        data: data,
+                        // success : function(data) {console.log(data)} - need to write function to make image disappear
+                    });
+            });
+        });
+ </script>
+
 
 {% endblock %}

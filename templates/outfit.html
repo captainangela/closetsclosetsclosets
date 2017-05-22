@@ -24,20 +24,22 @@ the weather is {{ temp }} <br>
     {% else %}
       <img id="tops" class="top" src="{{ top }}">
     {% endif %}
-    <button id="changetop">Next</button> 
+    <button id="changetop">Random Shirt</button> 
   </div>
   <div>
     <img id="bottoms" class="bottom" src="{{ bottom }}">
-    <button id="changebottom">Next</button> 
+    <button id="changebottom">Random Bottom</button> 
   </div>  
   <div>
     <img id="jacket" class="jackets" src="{{ jacket }}" style="display: none;">
   </div>
   <div>
-    <button id="addAccessory">Add Accessory</button> 
+    <img id="accessory" class="accessories" src="{{ accessory }}" style="display: none;">
+    <button id="addaccessory">Add Accessory</button> 
   </div>  
   <div>
-    <button id="addShoes">Add Shoes</button> 
+    <img id="shoe" class="shoes" src="{{ shoe }}" style="display: none;">
+    <button id="addshoes">Add Shoes</button>
   </div>  
 <div>
 
@@ -58,6 +60,35 @@ the weather is {{ temp }} <br>
   }
   jacketbutton.addEventListener('click', addJacket);
 
+  //adding shoes after clicking the button
+  var shoebutton = document.getElementById('addshoes');
+  function addShoes(){
+    $('#shoe').toggle();
+  }
+  shoebutton.addEventListener('click', addShoes);
+  //changing shoe button text
+  $(function(){
+    $("#addshoes").click(function (){
+      $(this).text(function(i, text){
+        return text == "Add Shoes" ? "No Shoes" : "Add Shoes";
+      })
+    });
+  })
+
+  //adding an accessory after clicking the button
+  var accessorybutton = document.getElementById('addaccessory');
+  function addAccessory(){
+    $('#accessory').toggle();
+  }
+  accessorybutton.addEventListener('click', addAccessory);
+  //changing the text on the button after clicking
+  $(function(){
+    $("#addaccessory").click(function (){
+      $(this).text(function(i, text){
+        return text == "Add Accessory" ? "No Accessory" : "Add Accessory";
+      })
+    });
+  })
 
   //clicking next button will choose another random top
   var topsbutton = document.getElementById('changetop');

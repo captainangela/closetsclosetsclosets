@@ -178,6 +178,10 @@ def add_clothes():
     
         db.session.add(new_association)
     
+    # delete article of clothing from database
+    # article = Articles.query.get(id)
+    # db.session.delete(article)
+
     db.session.commit()
 
  
@@ -187,13 +191,7 @@ def add_clothes():
 @app.route("/outfit")
 def enter_outfit_details():
     """Generate a random outfit."""
-
-    #enter zipcode for weather - if colder than 65, yes to jacket
-    #choose an activity to do
     #group by keywords
-    #choose a top and bottom
-    #option of choosing shoes and accessories
-    #javascript dependent menus
 
     #add suggestions for clothes on the web that you can buy
     activities = ["urban hike", "dinner", "brunch", "workout", "concert", "girls night out",
@@ -223,17 +221,6 @@ def get_random_outfit():
     #ex: keyword: hiking -- want a top with keyword clothing
 
     #make a list of lists, does random for each list and then creates a list of it's choices -- list comp
-    # tops = db.session.query(Articles).join(ClothingKeyword).filter(ClothingKeyword.keyword_id==activity,
-    #                                                               Articles.category_id=='tops').all()
-    # bottoms = db.session.query(Articles).join(ClothingKeyword).filter(ClothingKeyword.keyword_id==activity,
-    #                                                               Articles.category_id=='bottoms').all()
-    # jackets = db.session.query(Articles).join(ClothingKeyword).filter(Articles.category_id=='jackets').all()
-    # dresses = db.session.query(Articles).join(ClothingKeyword).filter(ClothingKeyword.keyword_id==activity,
-    #                                                               Articles.category_id=='dresses').all()
-    # accessories = db.session.query(Articles).join(ClothingKeyword).filter(ClothingKeyword.keyword_id==activity,
-    #                                                               Articles.category_id=='accessories').all()
-    # shoes = db.session.query(Articles).join(ClothingKeyword).filter(ClothingKeyword.keyword_id==activity,
-    #                                                               Articles.category_id=='shoes').all()
     
     clothing_dictionary = {}
     for category in categories:
@@ -244,46 +231,11 @@ def get_random_outfit():
         else:
             clothing_dictionary[category] = random.choice(cat).url
         
+    #need to figure out how to separate dresses and tops
 
-    # tops_dict = {}
-    # bottoms_list = []
-    # jackets_list = []
-    # accessories_list = []
-    # shoes = []
-
-    # for top in tops:
-    #    tops_dict[top.url] = top.category_id
-
-    # for bottom in bottoms:
-    #     bottoms_list.append(bottom.url)
-
-    # for jacket in jackets:
-    #     jackets_list.append(jacket.url)
-
-    # for dress in dresses:
-    #     tops_dict[dress.url] = dress.category_id
-
-    # for accessory in accessories:
-    #     accessories_list.append(accessory.url)
-
-    # for shoe in shoes:
-    #     shoes_list.append(shoe.url)
-
-
-    # # print tops_dict 
-
-    # if tops_dict == {}:
-    #     top = None
-    # else:    
-    #     top = random.choice(tops_dict.items())
-    # bottom = random.choice(bottoms).url
-    # jacket = random.choice(jackets).url
-
-    # print top
-    # print bottoms_list
-
-    return render_template("outfit.html", temp=temp['temp'], top=clothing_dictionary['tops'], bottom=clothing_dictionary['bottoms'], jacket=clothing_dictionary['jackets'], 
-                           activity=activity)
+    return render_template("outfit.html", temp=temp['temp'], top=clothing_dictionary['tops'], bottom=clothing_dictionary['bottoms'], 
+                           jacket=clothing_dictionary['jackets'], accessory=clothing_dictionary['accessories'],
+                           shoe=clothing_dictionary['shoes'], activity=activity)
 
 
 @app.route('/get_random_article/<activity>/<category>')
@@ -311,7 +263,30 @@ def show_closet():
         for category in categories
     }
 
+    # delete article of clothing from database
+    # article.query.filter(Article.clothing_id==clothing_id).delete()
+    # db.session.commit()
+
     return render_template("closet.html", **closet)
+
+
+@app.route("/delete_clothes", methods=['POST'])
+def delete_clothes():
+    """"Deletes clothes from user's closet"""
+    article_id = request.form["del_id"]
+
+    delete_clothing_article = Articles.query.get(article_id)
+    delete_clothing_keywords = ClothingKeyword.query.filter(ClothingKeyword.clothing_id==article_id).all()
+
+    for item in delete_clothing_keywords:
+        db.session.delete(item)
+
+    db.session.delete(delete_clothing_article)
+    
+    db.session.commit()
+
+    return "success!"
+
 
 
 @app.route("/favorites")
