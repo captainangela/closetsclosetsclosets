@@ -5,13 +5,15 @@ from jinja2 import StrictUndefined
 from flask import Flask, render_template, request, flash, redirect, session
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model import connect_to_db, db, Users, Articles, Category, Keyword, ClothingKeyword
+from model import connect_to_db, db, Users, Articles, Category, Keyword, ClothingKeyword, Favorites
 
 import hashlib, pyowm, random
 
 
 
 categories = 'tops bottoms dresses jackets accessories shoes'.split()
+keywords = ['Urban Hike','Dinner','Brunch','Workout','Concert','Girls Night Out',
+            'Hiking','Casual Date','Stay At Home','Beach','Picnic','Date Night','Pool', 'Work']
 
 # category = Category.query.all()
 # categories = []
@@ -42,6 +44,7 @@ def get_weather():
     status = weather._status
     
     return temp, status
+
 
 @app.route('/')
 def index():
@@ -216,12 +219,7 @@ def get_random_outfit():
     observation = owm.weather_at_place(zipcode)
     weather = observation.get_weather()
     temp = weather.get_temperature('fahrenheit')
-
-    #use ajax to generate outfit/scroll through options without having to refresh page
-    #ex: keyword: hiking -- want a top with keyword clothing
-
-    #make a list of lists, does random for each list and then creates a list of it's choices -- list comp
-    
+  
     clothing_dictionary = {}
     for category in categories:
         cat = db.session.query(Articles).join(ClothingKeyword).filter(ClothingKeyword.keyword_id==activity,
@@ -263,16 +261,13 @@ def show_closet():
         for category in categories
     }
 
-    # delete article of clothing from database
-    # article.query.filter(Article.clothing_id==clothing_id).delete()
-    # db.session.commit()
-
     return render_template("closet.html", **closet)
 
 
 @app.route("/delete_clothes", methods=['POST'])
 def delete_clothes():
     """"Deletes clothes from user's closet"""
+    
     article_id = request.form["del_id"]
 
     delete_clothing_article = Articles.query.get(article_id)
@@ -282,18 +277,46 @@ def delete_clothes():
         db.session.delete(item)
 
     db.session.delete(delete_clothing_article)
-    
     db.session.commit()
 
     return "success!"
 
 
+@app.route("/add_favorites", methods=['POST'])
+def get_favorite_outfits():
+    """Allows users to favorite outfits."""
+
+    urls = request.get_json()
+  
+    top_url = urls['top']
+    bottom_url = urls['bottom']
+    activity = urls['activity']
+
+    top_object = Articles.query.filter(Articles.url==top_url).one()
+    bottom_object = Articles.query.filter(Articles.url==bottom_url).one()
+
+    new_favorite = Favorites(keyword_id=activity, username=session['username'],
+                             top_id=top_object.clothing_id, bottom_id=bottom_object.clothing_id)
+
+    db.session.add(new_favorite)
+    db.session.commit()
+
+    return "success!"
+
 
 @app.route("/favorites")
-def show_favorite_outfits():
-    """Show's users favorited outfits."""
+def show_favorites():
+    """Show's user's favorited outfits"""
+    favorite = {
+        keyword: Favorites.query.filter(Favorites.keyword_id==keyword, 
+                                        Favorites.username==session['username']).all()
+        for keyword in keywords
+    }
 
-    pass
+    print favorite 
+
+    return render_template("favorites.html", keys=favorite.keys(), favorite=favorite)
+    
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point

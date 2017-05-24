@@ -42,11 +42,11 @@ the weather is {{ temp }} <br>
     <button id="addshoes">Add Shoes</button>
   </div>  
 <div>
+  <button data-url="{{ top }}" id="favoriteoutfit">Favorite This Outfit</button>
 
 <script>
   var temp = {{ temp }}
 
-  //if temperature is colder tha 65 degrees, show add jacket button
   if (temp < 65){
     document.getElementById('addjacket').style.visibility="visible";
   }
@@ -129,10 +129,27 @@ the weather is {{ temp }} <br>
     document.getElementById('bottoms').style.visibility="visible";
   }
   
-  console.log(cat_id)
 
-/////////////////////////////////////////
 
+//////////////////////adding outfit to favorites///////////////////
+
+$(function() {
+    $("#favoriteoutfit").click(function() {
+        var urls = {'top': "{{ top }}",
+          'bottom': "{{ bottom }}",
+          'activity': "{{ activity }}"}
+        var data = JSON.stringify(urls)
+          console.log(data)
+            $.ajax({
+                type : "POST",
+                url : "/add_favorites",
+                data: data,
+                dataType: "json",
+                contentType: "application/json"
+                // success : function(data) {console.log(data)} - need to write function to make image disappear
+            });
+    });
+});
 
 </script>
 

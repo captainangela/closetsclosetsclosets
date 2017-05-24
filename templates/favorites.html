@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+ <h3>Favorite Outfits:
+ <br>
+ <br>
+	{% for key in keys %}
+		{% for outfit in favorite[key] %}
+			{{ key }}:
+			<div class="container">
+	 		<img class="top" src="{{ outfit.top.url}}" class="image">
+	 		</div>
+	 		<div class="container">
+	 		<img class="bottom" src="{{ outfit.bottom.url}}" class="image">
+	 		</div>
+		{% endfor %}
+	 {% endfor %}
+
+<br>
+<br>
+<a href="/users">Back to homepage</a>
+
+{% endblock %}

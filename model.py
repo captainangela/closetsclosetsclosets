@@ -95,24 +95,26 @@ class Favorites(db.Model):
     __tablename__ = "favorites"
 
     favorite_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    top = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
-    bottom = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
-    jacket = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
-    accessory = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
-    shoes = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
+    username = db.Column(db.String(30), db.ForeignKey('users.username'), nullable=False) 
+    keyword_id = db.Column(db.String(64), db.ForeignKey('keyword.keyword_id'), nullable=False)
+    top_id = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
+    bottom_id = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
+    jacket_id = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
+    accessory_id = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
+    shoes_id = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
+
+    top = db.relationship('Articles', foreign_keys='Favorites.top_id')
+    bottom = db.relationship('Articles', foreign_keys='Favorites.bottom_id')
+    jacket = db.relationship('Articles', foreign_keys='Favorites.jacket_id')
+    accessory = db.relationship('Articles', foreign_keys='Favorites.accessory_id')
+    shoes = db.relationship('Articles', foreign_keys='Favorites.shoes_id')
 
 
-class PastOutfits(db.Model):
-    """Users's past outfits."""
+    def __repr__(self):
+        """Provide helpful representation when printed."""
 
-    __tablename__ = "oldoutfits"
+        return "<Keyword=%s>" % (self.keyword_id)
 
-    favorite_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    top = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
-    bottom = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
-    jacket = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
-    accessory = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
-    shoes = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
 
 ##############################################################################
 # Helper functions

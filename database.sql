@@ -37,12 +37,14 @@ CREATE TABLE clothing_keyword (
 );
 
 CREATE TABLE favorites (
-    favorites_id SERIAL PRIMARY KEY,
-    clothing_id1 INT REFERENCES articles(clothing_id) NOT NULL,
-    clothing_id2 INT REFERENCES articles(clothing_id), 
-    clothing_id3 INT REFERENCES articles(clothing_id),
-    clothing_id4 INT REFERENCES articles(clothing_id),
-    clothing_id5 INT REFERENCES articles(clothing_id)
+    favorite_id SERIAL PRIMARY KEY,
+    username VARCHAR(30) REFERENCES users(username) NOT NULL,
+    keyword_id VARCHAR(30) REFERENCES keyword(keyword_id) NOT NULL,
+    top_id INT REFERENCES articles(clothing_id) NOT NULL,
+    bottom_id INT REFERENCES articles(clothing_id), 
+    jacket_id INT REFERENCES articles(clothing_id),
+    accessory_id INT REFERENCES articles(clothing_id),
+    shoes_id INT REFERENCES articles(clothing_id)
 );
 -- Insert User
 
