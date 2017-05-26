@@ -1,6 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<body class="closetbackground" background="static/img/stick.png"> 
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+.myTops {display:none;}
+.myBottoms {display:none;}
+</style>
+<body>
+
   <h1>Welcome {{ user.fname }}!</h1>
   <img src="https://i.giphy.com/kP456mbrV8CnC.gif">
   <br>
@@ -14,6 +24,55 @@
   <br>
   <br>
   <a href="/favorites">Favorite Outfits</a>
+  <br>
+  <br>
+  <a href="/past_outfits">Past Outfits</a>
   </h2>
 
+
+<div class="w3-content w3-section" style="max-width:200px">
+  <img class="myTops w3-animate-right" src="https://s-media-cache-ak0.pinimg.com/originals/ce/40/1e/ce401e1dd6906d65c79f254ed1d3c371.png" style="width:100%">
+  <img class="myTops w3-animate-left" src="http://www.teerabbit.com/product_view_image/s/image/4/468/353/sportgrey.png?1441067253" style="width:100%">
+  <img class="myTops w3-animate-right" src="http://www.stickpng.com/assets/thumbs/58e38d00204d556bbd97b162.png" style="width:100%">
+</div>
+
+<div class="w3-content w3-section" style="max-width:200px">
+  <img class="myBottoms w3-animate-left" src="http://static.lindex.com/Archive/ProductImages/7035/7035006/S0000007071004_F_W40_20131129134203.png" style="width:100%">
+  <img class="myBottoms w3-animate-right" src="http://www.olsen.co.uk/out/pictures/master/product/1/14000007-80000_1.png" style="width:100%">
+  <img class="myBottoms w3-animate-left" src="http://www.stickpng.com/assets/thumbs/580b57fbd9996e24bc43bf39.png" style="width:100%">
+</div>
+
+<script>
+var myIndex = 0;
+carousel1();
+
+function carousel1() {
+    var i;
+    var x = document.getElementsByClassName("myTops");
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";  
+    }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}    
+    x[myIndex-1].style.display = "block";  
+    setTimeout(carousel1, 2500);    
+}
+</script>
+
+<script>
+var myIndexes = 0;
+carousel2();
+
+function carousel2() {
+    var e;
+    var f = document.getElementsByClassName("myBottoms");
+    for (e = 0; e < f.length; e++) {
+      f[e].style.display = "none";  
+    }
+    myIndexes++;
+    if (myIndexes > f.length) {myIndexes = 1}    
+    f[myIndexes-1].style.display = "block";  
+    setTimeout(carousel2, 2500);    
+}
+</script>
 {% endblock %}

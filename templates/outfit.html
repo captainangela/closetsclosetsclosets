@@ -41,8 +41,12 @@ the weather is {{ temp }} <br>
     <img id="shoe" class="shoes" src="{{ shoe }}" style="display: none;">
     <button id="addshoes">Add Shoes</button>
   </div>  
-<div>
+  <div>
   <button data-url="{{ top }}" id="favoriteoutfit">Favorite This Outfit</button>
+  </div>
+  <div>
+  <button data-url="{{ top }}" id="weartoday">Wear Today!</button>
+  </div>
 
 <script>
   var temp = {{ temp }}
@@ -141,8 +145,8 @@ $(function() {
         var data = JSON.stringify(urls)
           console.log(data)
             $.ajax({
-                type : "POST",
-                url : "/add_favorites",
+                type: "POST",
+                url: "/add_favorites",
                 data: data,
                 dataType: "json",
                 contentType: "application/json"
@@ -151,6 +155,24 @@ $(function() {
     });
 });
 
+
+$(function() {
+    $("#weartoday").click(function() {
+        var check = {'top': "{{ top }}",
+          'bottom': "{{ bottom }}",
+          'activity': "{{ activity }}"}
+        var datas = JSON.stringify(check)
+          console.log(datas)
+            $.ajax({
+                type: "POST",
+                url: "/add_history",
+                data: datas,
+                dataType: "json",
+                contentType: "application/json"
+                // success : function(data) {console.log(data)} - need to write function to make image disappear
+            });
+    });
+});
 </script>
 
 

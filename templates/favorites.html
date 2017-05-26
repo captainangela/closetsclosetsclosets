@@ -5,8 +5,8 @@
  <br>
  <br>
 	{% for key in keys %}
+		{{ key }}:
 		{% for outfit in favorite[key] %}
-			{{ key }}:
 			<div class="container">
 	 		<img class="top" src="{{ outfit.top.url}}" class="image">
 	 		</div>
@@ -14,7 +14,8 @@
 	 		<img class="bottom" src="{{ outfit.bottom.url}}" class="image">
 	 		</div>
 		{% endfor %}
-	 {% endfor %}
+	{% endfor %}
+	
 
 <br>
 <br>

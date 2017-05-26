@@ -1,6 +1,7 @@
 """Models and database functions for clothes db."""
 
-from flask_sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy 
+from datetime import datetime
 
 # Here's where we create the idea of our database. We're getting this through
 # the Flask-SQLAlchemy library. On db, we can find the `session`
@@ -115,6 +116,27 @@ class Favorites(db.Model):
 
         return "<Keyword=%s>" % (self.keyword_id)
 
+
+class History(db.Model):
+    """Users's favorite outfits."""
+
+    __tablename__ = "history"
+
+    history_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    username = db.Column(db.String(30), db.ForeignKey('users.username'), nullable=False) 
+    keyword_id = db.Column(db.String(64), db.ForeignKey('keyword.keyword_id'), nullable=False)
+    date_worn = db.Column(db.DateTime, default=datetime.now())
+    top_id = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
+    bottom_id = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
+    jacket_id = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
+    accessory_id = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
+    shoes_id = db.Column(db.Integer, db.ForeignKey('articles.clothing_id'), nullable=True)
+
+    hist_top = db.relationship('Articles', foreign_keys='History.top_id')
+    hist_bottom = db.relationship('Articles', foreign_keys='History.bottom_id')
+    hist_jacket = db.relationship('Articles', foreign_keys='History.jacket_id')
+    hist_accessory = db.relationship('Articles', foreign_keys='History.accessory_id')
+    hist_shoes = db.relationship('Articles', foreign_keys='History.shoes_id')
 
 ##############################################################################
 # Helper functions

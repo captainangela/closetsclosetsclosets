@@ -5,7 +5,7 @@ from jinja2 import StrictUndefined
 from flask import Flask, render_template, request, flash, redirect, session
 from flask_debugtoolbar import DebugToolbarExtension
 
-from model import connect_to_db, db, Users, Articles, Category, Keyword, ClothingKeyword, Favorites
+from model import connect_to_db, db, Users, Articles, Category, Keyword, ClothingKeyword, Favorites, History
 
 import hashlib, pyowm, random
 
@@ -148,14 +148,14 @@ def user_detail():
     return render_template("user.html", user=user)
 
 
-@app.route("/add-clothes")
+@app.route("/add_clothes")
 def add_clothes_form():
     """Add clothes to database."""
     
     return render_template('add-clothes.html')
 
 
-@app.route('/add-clothes', methods=['POST'])
+@app.route('/add_clothes', methods=['POST'])
 def add_clothes():
     """Process registration."""
 
@@ -243,7 +243,7 @@ def get_another_random(activity, category):
 
     article = random.choice(db.session.query(Articles).join(ClothingKeyword).filter(ClothingKeyword.keyword_id==activity, 
                                                                       Articles.category_id==category).all())
-    #create function to use ajax to get another random article of clothing
+
     return article.url
 
 
@@ -286,6 +286,8 @@ def delete_clothes():
 def get_favorite_outfits():
     """Allows users to favorite outfits."""
 
+    #can't have repeats in favorites
+
     urls = request.get_json()
   
     top_url = urls['top']
@@ -313,10 +315,53 @@ def show_favorites():
         for keyword in keywords
     }
 
-    print favorite 
-
     return render_template("favorites.html", keys=favorite.keys(), favorite=favorite)
     
+
+@app.route("/add_history", methods=['POST'])
+def get_past_outfits():
+    """Show outfits that users chose to wear that day."""
+
+    check = request.get_json()
+  
+    top_check = check['top']
+    bottom_check = check['bottom']
+    activity_check = check['activity']
+
+    top_obj = Articles.query.filter(Articles.url==top_check).one()
+    bottom_obj = Articles.query.filter(Articles.url==bottom_check).one()
+
+    new_history = History(keyword_id=activity_check, username=session['username'],
+                             top_id=top_obj.clothing_id, bottom_id=bottom_obj.clothing_id)
+
+    db.session.add(new_history)
+    db.session.commit()
+
+    return "success!"
+
+
+@app.route("/past_outfits")
+def show_past_outfits():
+    """Show user's past outfits on the calendar"""
+
+    #make fake data for history of outfits so that prior dates have shit
+
+    return render_template("past_outfits.html")
+
+
+@app.route('/get_past_outfit/')
+def get_past_outfit():
+
+    date_worn = request.args.get('date')
+    outfit = History.query.filter(History.date_worn==date_worn).first()
+
+    print date_worn
+
+    if outfit:
+        return outfit.hist_bottom.url + " " + outfit.hist_top.url 
+    else:
+        return "no past outfit"
+
 
 if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point

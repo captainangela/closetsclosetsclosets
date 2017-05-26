@@ -36,6 +36,7 @@ CREATE TABLE clothing_keyword (
     keyword_id VARCHAR(30) REFERENCES keyword(keyword_id) NOT NULL
 );
 
+
 CREATE TABLE favorites (
     favorite_id SERIAL PRIMARY KEY,
     username VARCHAR(30) REFERENCES users(username) NOT NULL,
@@ -46,6 +47,20 @@ CREATE TABLE favorites (
     accessory_id INT REFERENCES articles(clothing_id),
     shoes_id INT REFERENCES articles(clothing_id)
 );
+
+
+CREATE TABLE history (
+    history_id SERIAL PRIMARY KEY,
+    username VARCHAR(30) REFERENCES users(username) NOT NULL,
+    date_worn DATE NOT NULL,
+    keyword_id VARCHAR(30) REFERENCES keyword(keyword_id) NOT NULL,
+    top_id INT REFERENCES articles(clothing_id) NOT NULL,
+    bottom_id INT REFERENCES articles(clothing_id), 
+    jacket_id INT REFERENCES articles(clothing_id),
+    accessory_id INT REFERENCES articles(clothing_id),
+    shoes_id INT REFERENCES articles(clothing_id)
+);
+
 -- Insert User
 
 INSERT INTO users (username, password, fname, lname, bday, zipcode)
@@ -81,8 +96,6 @@ VALUES
 ('Pool'),
 ('Work');
 
--- Insert articles of clothing
-
 INSERT INTO articles (username, category_id, description, url) VALUES
 ('captainangela', 'bottoms', 'Blue Jeans', 'http://static.lindex.com/Archive/ProductImages/7035/7035006/S0000007071004_F_W40_20131129134203.png'),
 ('captainangela', 'tops', 'plain grey sweater', 'http://www.teerabbit.com/product_view_image/s/image/4/468/353/sportgrey.png?1441067253'),
@@ -113,6 +126,7 @@ VALUES (1, 'Dinner'),
 (1, 'Casual Date'),
 (1, 'Concert'),
 (1, 'Urban Hike'),
+(2, 'Casual Date'),
 (2, 'Urban Hike'),
 (2, 'Workout'),
 (2, 'Hiking'),
@@ -203,4 +217,23 @@ VALUES (1, 'Dinner'),
 (22, 'Brunch'),
 (22, 'Concert'),
 (22, 'Girls Night Out');
+
+INSERT INTO favorites (username, keyword_id, top_id, bottom_id) 
+VALUES ('captainangela', 'Girls Night Out', 22, 18),
+('captainangela', 'Casual Date', 2, 3),
+('captainangela', 'Brunch', 21, 1);
+
+INSERT INTO history (username, date_worn, keyword_id, top_id, bottom_id) 
+VALUES ('captainangela', '2017-05-01', 'Girls Night Out', 2, 3),
+('captainangela', '2017-05-02', 'Brunch', 21, 1),
+('captainangela', '2017-05-05', 'Casual Date', 2, 3),
+('captainangela', '2017-05-06', 'Hiking', 2, 4),
+('captainangela', '2017-05-08', 'Work', 17, 18),
+('captainangela', '2017-05-09', 'Concert', 22, 1),
+('captainangela', '2017-05-11', 'Urban Hike', 6, 4),
+('captainangela', '2017-05-15', 'Workout', 5, 4),
+('captainangela', '2017-05-20', 'Brunch', 21, 20),
+('captainangela', '2017-05-21', 'Stay At Home', 19, 1),
+('captainangela', '2017-05-24', 'Girls Night Out', 22, 3);
+
 
