@@ -26,8 +26,6 @@ app = Flask(__name__)
 # Required to use Flask sessions and the debug toolbar
 app.secret_key = "mynameisangelahaha"
 
-# Normally, if you use an undefined variable in Jinja2, it fails silently.
-# This is horrible. Fix this so that, instead, it raises an error.
 app.jinja_env.undefined = StrictUndefined
 
 def get_weather():
@@ -84,14 +82,7 @@ def register_process():
     db.session.commit()
 
     flash("User %s added." % username)
-    return redirect("/login")
-
-
-@app.route('/login', methods=['GET'])
-def login_form():
-    """Show login form."""
-
-    return render_template("login-form.html")
+    return redirect("/users")
 
 
 @app.route('/login', methods=['POST'])
@@ -115,13 +106,10 @@ def login_process():
         flash("Incorrect password")
         return redirect("/login")
 
-    session["username"] = user.username
+    session['username'] = user.username
     session["temp"] = get_weather()[0]["temp"]
     session["status"] = get_weather()[1]
 
-    print session["status"]
-
-    flash("Logged in")
     return redirect("/users")
 
 
@@ -140,11 +128,9 @@ def user_detail():
     #import pdb; pdb.set_trace()
 
     username = session['username']
-    #print session
+
     user = Users.query.get(username)
 
-    print get_weather()
-   
     return render_template("user.html", user=user)
 
 
@@ -159,18 +145,14 @@ def add_clothes_form():
 def add_clothes():
     """Process registration."""
 
-    # Get form variables
     category_id = request.form["category"]
     description = request.form["description"]
     url = request.form["url"]
-
-    #import pdb; pdb.set_trace()
 
     #create new article of clothing in closets
     new_clothing = Articles(username=session['username'], category_id=category_id, 
                             description=description, url=url)
 
-    #adds article of clothing to database
     db.session.add(new_clothing)
     db.session.commit()
 
@@ -180,10 +162,6 @@ def add_clothes():
         new_association = ClothingKeyword(clothing_id=new_clothing.clothing_id, keyword_id=keyword)
     
         db.session.add(new_association)
-    
-    # delete article of clothing from database
-    # article = Articles.query.get(id)
-    # db.session.delete(article)
 
     db.session.commit()
 
@@ -194,9 +172,7 @@ def add_clothes():
 @app.route("/outfit")
 def enter_outfit_details():
     """Generate a random outfit."""
-    #group by keywords
 
-    #add suggestions for clothes on the web that you can buy
     activities = ["urban hike", "dinner", "brunch", "workout", "concert", "girls night out",
                   "hiking", "casual date", "stay at home", "beach", "picnic", "date night", "pool"] 
 
@@ -240,12 +216,10 @@ def get_random_outfit():
 def get_another_random(activity, category):
     """Get's more random articles of clothing so user can scroll through outfit."""
 
-
     article = random.choice(db.session.query(Articles).join(ClothingKeyword).filter(ClothingKeyword.keyword_id==activity, 
                                                                       Articles.category_id==category).all())
 
     return article.url
-
 
 
 @app.route("/closet")

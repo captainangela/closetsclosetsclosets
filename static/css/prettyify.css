@@ -43,12 +43,18 @@
     width: 200px;
 }
 
-
 .closetbackground{
     background-repeat: no-repeat;
     background-size: contain, auto;
     background-attachment: fixed;
     background-position: center; 
+}
+
+.homepagebackground{
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 .container {
@@ -89,4 +95,174 @@
   font-size: 14px;
   padding: 16px 16px;
   text-transform: capitalize
+}
+
+body {
+    font-family: "Lato", sans-serif;
+}
+
+.sidenav {
+    height: 100%;
+    width: 0%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidenav a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover, .offcanvas a:focus{
+    color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
+
+#main {
+    transition: margin-left .5s;
+    padding: 20px;
+}
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #efefef;
+  text-align: center;
+}
+
+html {
+  height: 100%;
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding-bottom: 6rem;
+  min-height: 100%;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.demo {
+  margin: 0 auto;
+  padding-top: 64px;
+  max-width: 640px;
+  width: 94%;
+}
+
+#homepagetop{
+  height:50px
+  width:100px;
+}
+
+.popup-box {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* The actual popup */
+.popup-box .popuptext {
+    visibility: hidden;
+    width: 160px;
+    height: 160px;
+    background-color: #555;
+    color: #FA8072;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 200%;
+    left: 50%;
+    margin-left: -80px;
+    margin-bottom: -225px;
+}
+
+/* Toggle this class - hide and show the popup */
+.popup-box .show {
+    visibility: visible;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+h1 {
+  font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+  font-size: 92px;
+  padding: 10px 50px;
+  text-align: center;
+  text-transform: uppercase;
+  text-rendering: optimizeLegibility;
+}
+
+/*.retroshadow {
+    color: #2c2c2c;
+    letter-spacing: .05em;
+    text-shadow: 
+      4px 4px 0px #d5d5d5, 
+      7px 7px 0px rgba(0, 0, 0, 0.2);*/
+}
+
+.btn {
+  background: #484f54;
+  background-image: -webkit-linear-gradient(top, #484f54, #6d828f);
+  background-image: -moz-linear-gradient(top, #484f54, #6d828f);
+  background-image: -ms-linear-gradient(top, #484f54, #6d828f);
+  background-image: -o-linear-gradient(top, #484f54, #6d828f);
+  background-image: linear-gradient(to bottom, #484f54, #6d828f);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  -webkit-box-shadow: 0px 1px 3px #5e425e;
+  -moz-box-shadow: 0px 1px 3px #5e425e;
+  box-shadow: 0px 1px 3px #5e425e;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 10px 14px 10px 14px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #c8aecf;
+  background-image: -webkit-linear-gradient(top, #c8aecf, #dde5eb);
+  background-image: -moz-linear-gradient(top, #c8aecf, #dde5eb);
+  background-image: -ms-linear-gradient(top, #c8aecf, #dde5eb);
+  background-image: -o-linear-gradient(top, #c8aecf, #dde5eb);
+  background-image: linear-gradient(to bottom, #c8aecf, #dde5eb);
+  text-decoration: none;
 }

@@ -2,20 +2,22 @@
 <html>
 <head>
     <title>CLOTHETS</title>
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
     <link rel="icon" href="static/img/unnamed.png">
     <link rel="stylesheet" type="text/css" href="static/css/prettyify.css">
 </head>
 <body>
 
-Clothets 
-
-{% if "username" in session %}
-    <a href="/logout">Logout</a>
-{% else %}
-    <a href="/login">Login</a>
-{% endif %}
-
-<div align="center">
+<span>
+	{% if "username" in session %}
+	    <a href="/logout">Logout</a>
+	{% endif %}
+<div>
 	{% if "username" in session %}
 	    {{ session["temp"] }}℉ and 
 	    	{% if session["status"] == "Haze" %}
@@ -30,22 +32,31 @@ Clothets
 	    		💧
 	    	{% else %}
 	    		☀️
-	    	{% endif %}
 	{% endif %}
-</div>	
+	</div>
+	{% endif %}
+</span>	
 
-<hr>
+
 
 {% for flash in get_flashed_messages() %}
   {{ flash }}
 {% endfor %}
 
 {% block content %}
+
     Put your body here.
+
 {% endblock %}
 
+<script src="http://code.jquery.com/jquery.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </body>
 
-<footer>
-<img src="static/img/unnamed.png" style="width:100px;height:100px">
+
+<div class="footer">
+<img src="static/img/unnamed.png" style="width:70px;height:70px">
+<br>
+<a href="/users">Back to homepage</a>
+</div>
 </html>

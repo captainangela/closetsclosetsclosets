@@ -1,16 +1,65 @@
 {% extends 'base.html' %}
 {% block content %}
+<head>
+<style>
+/* Add animation (fade in the popup) */
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+}
 
-  <h1>Welcome!</h1>
-  <img src="https://i.giphy.com/n5x0YrlCXsOL6.gif">
-  <br>
-  <h2>Login here:
-  <a href="/login">Login</a>
-  <br>
-  <br>
-  Register here:
-  <a href="/register">Register</a>
-  </h2>
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}
+</style>
+</head>
+<body style="text-align:center">
+<body class="homepagebackground" background="https://longislandweekly.com/wp-content/uploads/2015/07/ClosetOrganization-A_ASAHouseandHome.jpg"> 
 
+
+<h1 class='retroshadow'>Welcome to your closet.</h1>
+<br>
+<br>
+<br>
+<br>
+<div >
+    <div class="popup-box">
+      <button class="btn" class="popup" onclick="myFunction()">Login</button>
+      <div class="popuptext" id="loginPopup">
+        <form action="/login" method="POST">
+            <div>
+                <label>Username:
+                    <input type="text" name="username" required>
+                </label>
+            </div>
+            <div>
+                <label>Password:
+                    <input type="password" name="password" required>
+                </label>
+            </div>
+            <div>
+                <input type="submit" value="Log In">
+            </div>
+        </form>
+      </div>
+    </div>
+    <div>
+    <h3>Not yet a user? Register <a href="/register">here</a>.</h3>
+    </div>
+</div>
+
+<script>
+
+// When the user clicks on div, open the popup
+function myFunction() {
+    var popup = document.getElementById("loginPopup");
+    popup.classList.toggle("show");
+}
+</script>
+
+
+</body>
+</html>
 
 {% endblock %}

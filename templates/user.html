@@ -1,45 +1,57 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<body class="closetbackground" background="static/img/stick.png"> 
+<!-- Adding navbar -->
 
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<style>
-.myTops {display:none;}
-.myBottoms {display:none;}
-</style>
-<body>
-
-  <h1>Welcome {{ user.fname }}!</h1>
-  <img src="https://i.giphy.com/kP456mbrV8CnC.gif">
-  <br>
-  <a href="/add-clothes"><h2>Add some clothes!</a>
-  <br>
-  <br>
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <a href="/add_clothes">Add clothes</a>
   <a href="/closet">See your closet</a>
-  <br>
-  <br>
   <a href="/outfit">Get an outfit</a>
-  <br>
-  <br>
   <a href="/favorites">Favorite Outfits</a>
-  <br>
-  <br>
   <a href="/past_outfits">Past Outfits</a>
-  </h2>
+</div>
 
+<br>
 
+<p>
+<span style="font-size:60px;cursor:pointer" onclick="openNav()">&#9776;</span>
+</p> 
+<script>
+  /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
+  function openNav() {
+      document.getElementById("mySidenav").style.width = "250px";
+      document.getElementById("main").style.marginLeft = "250px";
+  }
+
+  /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
+  function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      document.getElementById("main").style.marginLeft = "0";
+  }
+</script>
+
+<div id="main">
+  <body class="closetbackground" background="/static/img/lego2.png"> 
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <style>
+  .myTops {display:none;}
+  .myBottoms {display:none;}
+  </style>
+  <body>
+
+</div>
 <div class="w3-content w3-section" style="max-width:200px">
-  <img class="myTops w3-animate-right" src="https://s-media-cache-ak0.pinimg.com/originals/ce/40/1e/ce401e1dd6906d65c79f254ed1d3c371.png" style="width:100%">
-  <img class="myTops w3-animate-left" src="http://www.teerabbit.com/product_view_image/s/image/4/468/353/sportgrey.png?1441067253" style="width:100%">
-  <img class="myTops w3-animate-right" src="http://www.stickpng.com/assets/thumbs/58e38d00204d556bbd97b162.png" style="width:100%">
+  <img class="myTops w3-animate-right" src="/static/img/stripe.png" style="width:100%">
+  <img class="myTops w3-animate-left" src="/static/img/sportgrey.png" style="width:80%">
 </div>
 
 <div class="w3-content w3-section" style="max-width:200px">
-  <img class="myBottoms w3-animate-left" src="http://static.lindex.com/Archive/ProductImages/7035/7035006/S0000007071004_F_W40_20131129134203.png" style="width:100%">
-  <img class="myBottoms w3-animate-right" src="http://www.olsen.co.uk/out/pictures/master/product/1/14000007-80000_1.png" style="width:100%">
-  <img class="myBottoms w3-animate-left" src="http://www.stickpng.com/assets/thumbs/580b57fbd9996e24bc43bf39.png" style="width:100%">
+  <img class="myBottoms w3-animate-left" src="/static/img/jeans.png" style="width:100%">
+  <img class="myBottoms w3-animate-right" src="/static/img/black.png" style="width:80%">
+  <img class="myBottoms w3-animate-left" src="/static/img/skirt.png" style="width:75%">
 </div>
 
 <script>
@@ -55,7 +67,7 @@ function carousel1() {
     myIndex++;
     if (myIndex > x.length) {myIndex = 1}    
     x[myIndex-1].style.display = "block";  
-    setTimeout(carousel1, 2500);    
+    setTimeout(carousel1, 4000);    
 }
 </script>
 
@@ -72,7 +84,32 @@ function carousel2() {
     myIndexes++;
     if (myIndexes > f.length) {myIndexes = 1}    
     f[myIndexes-1].style.display = "block";  
-    setTimeout(carousel2, 2500);    
+    setTimeout(carousel2, 4000);    
 }
 </script>
+
+<!-- Button trigger modal -->
+<!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</button> -->
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add Clothes</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 {% endblock %}

@@ -3,111 +3,115 @@
 
 
 <body class="closetbackground" background="static/img/closet.png"> 
+<div class="container-fluid">
+	<div class="row">
+	  	<div class="col-lg-4">
+		 	<h1>Your closet!</h1>
+		 
+		<h3>Tops:
+			{% for top in tops %}
+			<div class="container">
+			 	<img class="top" src="{{top.url}}" class="image">
+			 	<div class="middle">
+		    		<div class="text">
+		    		{{ top.description }}
+		    		{% for c in top.clk %}
+					<ul> 👚 &nbsp; {{c.keyword_id}} </ul>
+			 		{% endfor %}
+			 		<button data-clothing="{{ top.clothing_id }}" class="delbutton">Remove</button>
+		    		</div>
+		  		</div>
+		  	</div>		
+			 {% endfor %}
+		</div>
+		 <h3>Bottoms:
+			 {% for bottom in bottoms %}
+			 	<div class="container">
+			 	<img class="top" src="{{bottom.url}}" class="image">
+			 	<div class="middle">
+		    		<div class="text">
+		    		{{ bottom.description }}
+		    		{% for c in bottom.clk %}
+					<ul>👖 &nbsp; {{c.keyword_id}}</ul>
+			 		{% endfor %}
+			 		<button data-clothing="{{ bottom.clothing_id }}" class="delbutton">Remove</button>
+		    		</div>
+		  		</div>
+		  	</div>		
+			 {% endfor %}
 
- <h1>Your closet!</h1>
- 	
- <h3>Tops:
-	{% for top in tops %}
-	<div class="container">
-	 	<img class="top" src="{{top.url}}" class="image">
-	 	<div class="middle">
-    		<div class="text">
-    		{{ top.description }}
-    		{% for c in top.clk %}
-			<ul> 👚 &nbsp; {{c.keyword_id}} </ul>
-	 		{% endfor %}
-	 		<button data-clothing="{{ top.clothing_id }}" class="delbutton">Remove</button>
-    		</div>
-  		</div>
-  	</div>		
-	 {% endfor %}
+		 <h3>Dresses:
+			 {% for dress in dresses %}
+			 	<div class="container">
+			 	<img class="top" src="{{dress.url}}" class="image">
+			 	<div class="middle">
+		    		<div class="text">
+		    		{{ dress.description }}
+		    		{% for c in dress.clk %}
+					<ul>👗 &nbsp; {{c.keyword_id}}</ul>
+			 		{% endfor %}
+			 		<button data-clothing="{{ dress.clothing_id }}" class="delbutton">Remove</button>
+		    		</div>
+		  		</div>
+		  	</div>		
+			 {% endfor %}
 
- <h3>Bottoms:
-	 {% for bottom in bottoms %}
-	 	<div class="container">
-	 	<img class="top" src="{{bottom.url}}" class="image">
-	 	<div class="middle">
-    		<div class="text">
-    		{{ bottom.description }}
-    		{% for c in bottom.clk %}
-			<ul>👖 &nbsp; {{c.keyword_id}}</ul>
-	 		{% endfor %}
-	 		<button data-clothing="{{ bottom.clothing_id }}" class="delbutton">Remove</button>
-    		</div>
-  		</div>
-  	</div>		
-	 {% endfor %}
+		 <h3>Jackets:
+			 {% for jacket in jackets %}
+			 	<div class="container">
+			 	<img class="top" src="{{jacket.url}}" class="image">
+			 	<div class="middle">
+		    		<div class="text">
+		    		{{ jacket.description }}
+		    		{% for c in jacket.clk %}
+					<ul>❄ &nbsp; {{c.keyword_id}}</ul>
+			 		{% endfor %}
+			 		<button data-clothing="{{ jacket.clothing_id }}" class="delbutton">Remove</button>
+		    		</div>
+		  		</div>
+		  	</div>		
+			 {% endfor %}
 
- <h3>Dresses:
-	 {% for dress in dresses %}
-	 	<div class="container">
-	 	<img class="top" src="{{dress.url}}" class="image">
-	 	<div class="middle">
-    		<div class="text">
-    		{{ dress.description }}
-    		{% for c in dress.clk %}
-			<ul>👗 &nbsp; {{c.keyword_id}}</ul>
-	 		{% endfor %}
-	 		<button data-clothing="{{ dress.clothing_id }}" class="delbutton">Remove</button>
-    		</div>
-  		</div>
-  	</div>		
-	 {% endfor %}
+		 <h3>Accessories:
+			 {% for accessory in accessories %}
+			 	<div class="container">
+			 	<img class="top" src="{{accessory.url}}" class="image">
+			 	<div class="middle">
+		    		<div class="text">
+		    		{{ accessory.description }}
+		    		{% for c in accessory.clk %}
+					<ul>👓 &nbsp; {{c.keyword_id}}</ul>
+			 		{% endfor %}
+			 		<button data-clothing="{{ accessory.clothing_id }}" class="delbutton">Remove</button>
+		    		</div>
+		  		</div>
+		  	</div>		
+			 {% endfor %}
 
- <h3>Jackets:
-	 {% for jacket in jackets %}
-	 	<div class="container">
-	 	<img class="top" src="{{jacket.url}}" class="image">
-	 	<div class="middle">
-    		<div class="text">
-    		{{ jacket.description }}
-    		{% for c in jacket.clk %}
-			<ul>❄ &nbsp; {{c.keyword_id}}</ul>
-	 		{% endfor %}
-	 		<button data-clothing="{{ jacket.clothing_id }}" class="delbutton">Remove</button>
-    		</div>
-  		</div>
-  	</div>		
-	 {% endfor %}
-
- <h3>Accessories:
-	 {% for accessory in accessories %}
-	 	<div class="container">
-	 	<img class="top" src="{{accessory.url}}" class="image">
-	 	<div class="middle">
-    		<div class="text">
-    		{{ accessory.description }}
-    		{% for c in accessory.clk %}
-			<ul>👓 &nbsp; {{c.keyword_id}}</ul>
-	 		{% endfor %}
-	 		<button data-clothing="{{ accessory.clothing_id }}" class="delbutton">Remove</button>
-    		</div>
-  		</div>
-  	</div>		
-	 {% endfor %}
-
-<h3>Shoes:
-	 {% for shoe in shoes %}
-	 	<div class="container">
-	 	<img class="top" src="{{shoe.url}}" class="image">
-	 	<div class="middle">
-    		<div class="text">
-    		{{ shoe.description }}
-    		{% for c in shoe.clk %}
-			<ul>👠 &nbsp; {{c.keyword_id}}</ul>
-	 		{% endfor %}
-	 		<button data-clothing="{{ shoe.clothing_id }}" class="delbutton">Remove</button> 
-    		</div>
-  		</div>
-  	</div>		
-	 {% endfor %}
+		<h3>Shoes:
+			 {% for shoe in shoes %}
+			 	<div class="container">
+			 	<img class="top" src="{{shoe.url}}" class="image">
+			 	<div class="middle">
+		    		<div class="text">
+		    		{{ shoe.description }}
+		    		{% for c in shoe.clk %}
+					<ul>👠 &nbsp; {{c.keyword_id}}</ul>
+			 		{% endfor %}
+			 		<button data-clothing="{{ shoe.clothing_id }}" class="delbutton">Remove</button> 
+		    		</div>
+		  		</div>
+		  	</div>		
+			 {% endfor %}
 
 
-  <br>
-  <br>
-  <a href="/users">Back to homepage</a>
-  </h2>
-
+		  <br>
+		  <br>
+		  <a href="/users">Back to homepage</a>
+		  </h3>
+		</div>
+	</div>
+</div>
   <script src="https://code.jquery.com/jquery.js"></script>
   <script type="text/javascript" >
         $(function() {

@@ -1,4 +1,4 @@
--- NOTE that sqlalchemy/database.sql is a symbolic link to sql/database.sql. 
+/-- NOTE that sqlalchemy/database.sql is a symbolic link to sql/database.sql. 
 -- ALL changes will be reflected in the sqlalchemy assessment.
 
 CREATE TABLE users (

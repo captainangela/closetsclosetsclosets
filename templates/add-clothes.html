@@ -1,67 +1,89 @@
 {% extends 'base.html' %}
 {% block content %}
 
-    <h1>Add Clothes to Your Closet!</h1>
-    <form action="/add_clothes" method="POST">
+<h1>Add Clothes to Your Closet.</h1>
 
-        <div>
-            <label>Category:  <!-- make this into jinja loop -->
-                <select name="category">
-                    <option value="default" selected="true" disabled="disabled">Choose One</option>
-                    <option value="tops">Top</option>
-                    <option value="bottoms">Bottom</option>
-                    <option value="dresses">Dress</option>
-                    <option value="jackets">Jacket</option>
-                    <option value="accessories">Accessory</option>
-                    <option value="shoes">Shoes</option>
-                </select>
-            </label>
-        </div>
+<div class="container">
+<form action="/add_clothes" method="POST">
+  <div class="form-group">
+    <label>Category</label>
+    <select name="category" class="form-control">  
+      <option value="default" selected="true" disabled="disabled">Choose One</option>
+      <option value="tops">Top</option>
+      <option value="bottoms">Bottom</option>
+      <option value="dresses">Dress</option>
+      <option value="jackets">Jacket</option>
+      <option value="accessories">Accessory</option>
+      <option value="shoes">Shoes</option>
+  </select>
+  </div>
+  <div class="form-group">
+    <label>Description</label>
+    <input type="text" class="form-control" name="description" placeholder="Description" rows="2">
+  </div>
+  <div class="form-group">
+    <label>Keywords</label><br>
+    <div class="checkbox">
+      <label><input type="checkbox" name="keyword" value="Urban Hike"> Urban Hike<br></label>
+    </div>
+    <div class="checkbox">
+    <label><input type="checkbox" name="keyword" value="Dinner"> Dinner<br></label>  
+    </div>
+    <div class="checkbox">
+    <label><input type="checkbox" name="keyword" value="Brunch"> Brunch<br></label>
+    </div>
+    <div class="checkbox">
+    <label><input type="checkbox" name="keyword" value="Workout"> Workout<br></label>
+    </div>
+    <div class="checkbox">
+    <label><input type="checkbox" name="keyword" value="Concert"> Concert<br></label>  
+    </div>
+    <div class="checkbox">
+    <label><input type="checkbox" name="keyword" value="Girls Night Out"> Girls Night Out<br></label>
+    </div>
+    <div class="checkbox">
+    <label><input type="checkbox" name="keyword" value="Hiking"> Hiking<br></label>
+    </div>
+    <div class="checkbox">
+    <label><input type="checkbox" name="keyword" value="Casual Date"> Casual Date<br></label> 
+    </div>
+    <div class="checkbox">
+    <label><input type="checkbox" name="keyword" value="Stay At Home"> Stay at Home<br></label>
+    </div>
+    <div class="checkbox">
+    <label><input type="checkbox" name="keyword" value="Beach"> Beach<br></label>
+    </div>
+    <div class="checkbox">
+    <label><input type="checkbox" name="keyword" value="Picnic"> Picnic</br></label>
+    </div>
+    <div class="checkbox">
+    <label><input type="checkbox" name="keyword" value="Date Night"> Date Night<br></label>
+    </div>
+    <div class="checkbox">
+    <label><input type="checkbox" name="keyword" value="Pool"> Pool<br></label>
+    </div>
+    <div class="checkbox">
+    <label><input type="checkbox" name="keyword" value="Work"> Work<br></label> 
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Image URL</label>
+    <input type="text" class="form-control" name="url" placeholder="Url Image" id="urlBox">
+  </div>
+  <div class="col-md-4 col-md-offset-4">
+    <button type="submit" class="btn btn-primary">Add</button>
+  </div>
+</form>
+</div>
 
-        <div>
-            <label>Description:
-                <input type="textarea" name="description" required>
-            </label>
-        </div>
+<img align="center" id='urlImg'>
+<script>
+var urlBox = document.getElementById('urlBox');
+urlBox.onchange =function() {
+    var img = document.getElementById('urlImg');
+    img.src = urlBox.value;
+};
+</script>
+<br>
 
-        <div>
-            <label>Keywords:<br>  <!-- make this into jinja loop -->
-                <input type="checkbox" name="keyword" value="Urban Hike"> Urban Hike<br>
-                <input type="checkbox" name="keyword" value="Dinner"> Dinner<br>  
-                <input type="checkbox" name="keyword" value="Brunch"> Brunch<br>
-                <input type="checkbox" name="keyword" value="Workout"> Workout<br>
-                <input type="checkbox" name="keyword" value="Concert"> Concert<br>  
-                <input type="checkbox" name="keyword" value="Girls Night Out"> Girls Night Out<br>
-                <input type="checkbox" name="keyword" value="Hiking"> Hiking<br>
-                <input type="checkbox" name="keyword" value="Casual Date"> Casual Date<br> 
-                <input type="checkbox" name="keyword" value="Stay At Home"> Stay at Home<br>
-                <input type="checkbox" name="keyword" value="Beach"> Beach<br>
-                <input type="checkbox" name="keyword" value="Picnic"> Picnic</br> 
-                <input type="checkbox" name="keyword" value="Date Night"> Date Night<br>
-                <input type="checkbox" name="keyword" value="Pool"> Pool<br>  
-                <input type="checkbox" name="keyword" value="Work"> Work<br> 
-            </label>
-        </div>
-
-        <div>
-            <label>Image URL:
-                <input type="text" name="url" id="urlBox" required>
-            </label>
-        </div>
-
-        <div>
-            <input type="submit" value="ADD">
-        </div>
-
-    </form>
-    <img id='urlImg'>
-    <script>
-    var urlBox = document.getElementById('urlBox');
-    urlBox.onchange =function() {
-        var img = document.getElementById('urlImg');
-        img.src = urlBox.value;
-    };
-    </script>
-
-    <a href="/users">Homepage</a>
 {% endblock %}

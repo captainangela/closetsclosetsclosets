@@ -3,54 +3,36 @@
 
 <h1>Register</h1>
 
+<div class="container">
 <form action="/register" method="POST">
-
-    <div>
-        <label>
-            Username
-            <input type="text" name="username">
-        </label>
-    </div>
-
-    <div>
-        <label>
-            Password
-            <input type="password" name="password">
-        </label>
-    </div>
-
-    <div>
-        <label>
-            First Name
-            <input type="text" name="fname">
-        </label>
-    </div>
-
-    <div>
-        <label>
-            Last Name
-            <input type="text" name="lname">
-        </label>
-    </div>
-
-    <div>
-        <label>
-            Birthday
-            <input type="date" name="bday">
-        </label>
-    </div>
-
-    <div>
-        <label>
-            Zipcode
-            <input type="text" name="zipcode">
-        </label>
-    </div>
-
-    <div>
-        <input type="submit" value="Register">
-    </div>
-
+  <div class="form-group">
+    <label>First Name</label>
+    <input type="text" class="form-control" name="fname" placeholder="Enter first name">
+  </div>
+  <div class="form-group">
+    <label>Last Name</label>
+    <input type="text" class="form-control" name="lname" placeholder="Enter last name">
+  </div>
+  <div class="form-group">
+    <label>Username</label>
+    <input type="text" class="form-control" name="username" placeholder="Enter username">
+  </div>
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" class="form-control" name="password" placeholder="Password">
+  </div>
+  <div class="form-group">
+    <label>Birthday</label>
+    <input type="date" class="form-control" name="bday">
+  </div>
+  <div class="form-group">
+    <label>Zipcode</label>
+    <input type="text" class="form-control" name="zipcode" placeholder="Enter zipcode">
+  </div>
+  <div class="col-md-4 col-md-offset-4">
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
 </form>
+</div>
 
 {% endblock %}
