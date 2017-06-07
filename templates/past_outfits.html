@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
-
+<body class="formbackground" background="static/img/concrete-texture.png">
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN""http://www.w3.org/TR/html4/strict.dtd">
 <html><head><title>Calendar 2017</title>
@@ -9,67 +9,13 @@
 <meta name="date.created" content="2017-05-24">
 <meta name="generator" content="HTML Calendar Maker 2.0">
 <meta name="licensekey" content="">
-<style type="text/css">
-/* Styling for the title (Month and Year) of the calendar */
-div.title {
-    font: x-large Verdana, Arial, Helvetica, sans-serif;
-    text-align: center;
-    height: 40px;
-    background-color: white;
-    color: black;
-    }
-/* Styling for the footer */
-div.footer {
-    font: small Verdana, Arial, Helvetica, sans-serif;
-    text-align: center;
-    }
-/* Styling for the overall table */
-table {
-    font: 100% Verdana, Arial, Helvetica, sans-serif;
-    table-layout: fixed;
-    border-collapse: collapse;
-    width: 100%;
-    }
-/* Styling for the column headers (days of the week) */
-th {
-    padding: 0 0.5em;
-    text-align: center;
-    background-color:gray;
-    color:white;
-    }
-/* Styling for the individual cells (days) */
-td  {     
-    font-size: medium;
-    padding: 0.25em 0.25em;   
-    width: 14%; 
-    height: 80px;
-    text-align: left;
-    vertical-align: top;
-    }
-/* Styling for the date numbers */
-.date  {     
-    font-size: large;
-    padding: 0.25em 0.25em;   
-    text-align: left;
-    vertical-align: top;
-    }
-/* Class for individual days (coming in future release) */
-.sun {
-     color:red;
-     }
-/* Hide the month element (coming in future release) */
-th.month {
-    visibility: hidden;
-    display:none;
-    }
-   
-</style>
+
 </head>
 <body>
-<div class="outfit">
-  <div class="pastoutfittop popuptext" id="myTopPopup">
+<div class="pastoutfit">
+  <div class="pastoutfittop outfitpopuptext" id="myTopPopup">
   </div>
-  <div class="pastoutfitbottom popuptext" id="myTopPopup">
+  <div class="pastoutfitbottom outfitpopuptext" id="myTopPopup">
   </div>
 </div>  
   <div class="title">May 2017</div>
@@ -85,37 +31,37 @@ th.month {
     </tr>
     <tr>
       <td><span class="date">&nbsp;</span></td>
-      <td><span class="date">1</span></td>
-      <td><span class="date">2</span></td>
+      <td><span class="date gotoutfit">1</span></td>
+      <td><span class="date gotoutfit">2</span></td>
       <td><span class="date">3</span></td>
       <td><span class="date">4</span></td>
-      <td><span class="date">5</span></td>
-      <td><span class="date">6</span></td>
+      <td><span class="date gotoutfit">5</span></td>
+      <td><span class="date gotoutfit">6</span></td>
     </tr>
     <tr>
       <td><span class="date">7</span></td>
-      <td><span class="date">8</span></td>
-      <td><span class="date">9</span></td>
+      <td><span class="date gotoutfit">8</span></td>
+      <td><span class="date gotoutfit">9</span></td>
       <td><span class="date">10</span></td>
-      <td><span class="date">11</span></td>
+      <td><span class="date gotoutfit">11</span></td>
       <td><span class="date">12</span></td>
       <td><span class="date">13</span></td>
     </tr>
     <tr>
       <td><span class="date">14</span></td>
-      <td><span class="date">15</span></td>
+      <td><span class="date gotoutfit">15</span></td>
       <td><span class="date">16</span></td>
       <td><span class="date">17</span></td>
       <td><span class="date">18</span></td>
       <td><span class="date">19</span></td>
-      <td><span class="date">20</span></td>
+      <td><span class="date gotoutfit">20</span></td>
     </tr>
     <tr>
-      <td><span class="date">21</span></td>
+      <td><span class="date gotoutfit">21</span></td>
       <td><span class="date">22</span></td>
       <td><span class="date">23</span></td>
       <td><span class="date">24</span></td>
-      <td><span class="date">25</span></td>
+      <td><span class="date gotoutfit">25</span></td>
       <td><span class="date">26</span></td>
       <td><span class="date">27</span></td>
     </tr>
@@ -211,15 +157,12 @@ th.month {
 
     $('.date').hover(
       function() {
+
         $(".pastoutfittop").empty();
         $(".pastoutfitbottom").empty();
         var date = { date: $(this).closest("table").attr('data-month') + $(this).text()}
 
-
-
         $.get(/get_past_outfit/, date, showPastOutfit)
-
-
 
         // $( this ).append( $( "<div> "+$(this).closest("table").attr('data-month') + $(this).text()+" </div>" ) );
       }, function() {
@@ -230,69 +173,7 @@ th.month {
 
 </script>
 
-<!DOCTYPE html>
-<html>
-<head>
-<style>
-/* Popup container - can be anything you want */
-.popup {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-/* The actual popup */
-.popup .popuptext {
-    visibility: hidden;
-    width: 160px;
-    background-color: #555;
-    color: #fff;
-    text-align: center;
-    border-radius: 6px;
-    padding: 8px 0;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    margin-left: -80px;
-}
-
-/* Popup arrow */
-.popup .popuptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: #555 transparent transparent transparent;
-}
-
-/* Toggle this class - hide and show the popup */
-.popup .show {
-    visibility: visible;
-    -webkit-animation: fadeIn 1s;
-    animation: fadeIn 1s;
-}
-
-/* Add animation (fade in the popup) */
-@-webkit-keyframes fadeIn {
-    from {opacity: 0;} 
-    to {opacity: 1;}
-}
-
-@keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity:1 ;}
-}
-</style>
-</head>
-<body style="text-align:center">
+<!-- <body style="text-align:center"> -->
 
 </body>
 </html>

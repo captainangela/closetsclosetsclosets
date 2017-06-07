@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
 
+<body class="formbackground" background="static/img/hip-square.png"> 
 <h1>Add Clothes to Your Closet.</h1>
 
 <div class="container">
@@ -23,65 +24,68 @@
   </div>
   <div class="form-group">
     <label>Keywords</label><br>
-    <div class="checkbox">
-      <label><input type="checkbox" name="keyword" value="Urban Hike"> Urban Hike<br></label>
+    <div class="col-md-6 col-md-offset-.75">
+      <div class="checkbox">
+      <label class="control control--checkbox"><input type="checkbox" name="keyword" value="Urban Hike"> Urban Hike<br><div class="control__indicator"></div></label>
+      </div>
+      <div class="checkbox">
+      <label class="control control--checkbox"><input type="checkbox" name="keyword" value="Dinner"> Dinner<br><div class="control__indicator"></div></label>  
+      </div>
+      <div class="checkbox">
+      <label class="control control--checkbox"><input type="checkbox" name="keyword" value="Brunch"> Brunch<br><div class="control__indicator"></div></label>
+      </div>
+      <div class="checkbox">
+      <label class="control control--checkbox"><input type="checkbox" name="keyword" value="Workout"> Workout<br><div class="control__indicator"></div></label>
+      </div>
+      <div class="checkbox">
+      <label class="control control--checkbox"><input type="checkbox" name="keyword" value="Concert"> Concert<br><div class="control__indicator"></div></label>  
+      </div>
+      <div class="checkbox">
+      <label class="control control--checkbox"><input type="checkbox" name="keyword" value="Girls Night Out"> Girls Night Out<br><div class="control__indicator"></div></label>
+      </div>
+      <div class="checkbox">
+      <label class="control control--checkbox"><input type="checkbox" name="keyword" value="Hiking"> Hiking<br><div class="control__indicator"></div></label>
+      </div>
     </div>
-    <div class="checkbox">
-    <label><input type="checkbox" name="keyword" value="Dinner"> Dinner<br></label>  
+    <div class="col-md-6">
+      <div class="checkbox">
+      <label class="control control--checkbox"><input type="checkbox" name="keyword" value="Casual Date"> Casual Date<br><div class="control__indicator"></div></label> 
+      </div>
+      <div class="checkbox">
+      <label class="control control--checkbox"><input type="checkbox" name="keyword" value="Stay At Home"> Stay at Home<br><div class="control__indicator"></div></label>
+      </div>
+      <div class="checkbox">
+      <label class="control control--checkbox"><input type="checkbox" name="keyword" value="Beach"> Beach<br><div class="control__indicator"></div></label>
+      </div>
+      <div class="checkbox">
+      <label class="control control--checkbox"><input type="checkbox" name="keyword" value="Picnic"> Picnic</br><div class="control__indicator"></div></label>
+      </div>
+      <div class="checkbox">
+      <label class="control control--checkbox"><input type="checkbox" name="keyword" value="Date Night"> Date Night<br><div class="control__indicator"></div></label>
+      </div>
+      <div class="checkbox">
+      <label class="control control--checkbox"><input type="checkbox" name="keyword" value="Pool"> Pool<br><div class="control__indicator"></div></label>
+      </div>
+      <div class="checkbox">
+      <label class="control control--checkbox"><input type="checkbox" name="keyword" value="Work"> Work<br><div class="control__indicator"></div></label> 
+      </div>
     </div>
-    <div class="checkbox">
-    <label><input type="checkbox" name="keyword" value="Brunch"> Brunch<br></label>
     </div>
-    <div class="checkbox">
-    <label><input type="checkbox" name="keyword" value="Workout"> Workout<br></label>
-    </div>
-    <div class="checkbox">
-    <label><input type="checkbox" name="keyword" value="Concert"> Concert<br></label>  
-    </div>
-    <div class="checkbox">
-    <label><input type="checkbox" name="keyword" value="Girls Night Out"> Girls Night Out<br></label>
-    </div>
-    <div class="checkbox">
-    <label><input type="checkbox" name="keyword" value="Hiking"> Hiking<br></label>
-    </div>
-    <div class="checkbox">
-    <label><input type="checkbox" name="keyword" value="Casual Date"> Casual Date<br></label> 
-    </div>
-    <div class="checkbox">
-    <label><input type="checkbox" name="keyword" value="Stay At Home"> Stay at Home<br></label>
-    </div>
-    <div class="checkbox">
-    <label><input type="checkbox" name="keyword" value="Beach"> Beach<br></label>
-    </div>
-    <div class="checkbox">
-    <label><input type="checkbox" name="keyword" value="Picnic"> Picnic</br></label>
-    </div>
-    <div class="checkbox">
-    <label><input type="checkbox" name="keyword" value="Date Night"> Date Night<br></label>
-    </div>
-    <div class="checkbox">
-    <label><input type="checkbox" name="keyword" value="Pool"> Pool<br></label>
-    </div>
-    <div class="checkbox">
-    <label><input type="checkbox" name="keyword" value="Work"> Work<br></label> 
-    </div>
-  </div>
   <div class="form-group">
     <label>Image URL</label>
     <input type="text" class="form-control" name="url" placeholder="Url Image" id="urlBox">
   </div>
-  <div class="col-md-4 col-md-offset-4">
+  <div class="col-md-2 col-md-offset-2">
     <button type="submit" class="btn btn-primary">Add</button>
   </div>
 </form>
 </div>
 
-<img align="center" id='urlImg'>
+<img id='urlImg'>
 <script>
 var urlBox = document.getElementById('urlBox');
 urlBox.onchange =function() {
-    var img = document.getElementById('urlImg');
-    img.src = urlBox.value;
+    $("#urlImg").toggle().attr("src", urlBox.value).css("display", "block")
 };
 </script>
 <br>

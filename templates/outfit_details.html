@@ -1,18 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>Please enter some details about your activity</h1>
+<body class="formbackground" background="static/img/hip-square.png"> 
+<h1>Please enter some details about your activity.</h1>
 
+<div class="container">
 <form action="/outfit_generated" method="POST">
-
-  <div>
-      <label>What zip code are you in?
+  <div class="form-group">
+  <div class="col-md-6">
+      <label><h3><b>Enter a zipcode</b></label>
           <input type="text" name="zipcode" required>
-      </label>
   </div>
-
-  <div>
-      <label>What activity will you be doing?
+  </div>
+  <div class="form-group">
+  <div class="col-md-6">
+      <label><h3><b>Choose an activity</b></label>
       <select name="activity">
         <option value="default" selected="true" disabled="disabled">Choose One</option>
         <option value="Urban Hike"> Urban Hike</option>
@@ -27,15 +29,17 @@
         <option value="Beach"> Beach</option>
         <option value="Picnic"> Picnic<//option> 
         <option value="Date Night"> Date Night</option>
-        <option value="Pool"> Pool</option>   
-        <!-- {{ select_string }} -->
-    </label>
-      </label>
+        <option value="Pool"> Pool</option>
+      </select>    
+  </div>
+  </div>
+  <div class="col-md-8 offset-md-5">
+      <button type="submit" class="btn btn-primary">Show Me An Outfit</button>
   </div>
 
-  <div>
-      <input type="submit" value="Submit">
-  </div>
+</form>
+</div>
+
 <br>
 <br>
 <br>

@@ -3,18 +3,17 @@
 
 
 <body class="closetbackground" background="static/img/closet.png"> 
-<div class="container-fluid">
-	<div class="row">
-	  	<div class="col-lg-4">
-		 	<h1>Your closet!</h1>
-		 
-		<h3>Tops:
+<div id="transparenttitle">
+	<!-- <h1 id="closettitle">Your closet.</h1> -->
+</div>
+<div class="container-fluid" id="closet">
+		<div class="col-md-4 clothes">
 			{% for top in tops %}
 			<div class="container">
 			 	<img class="top" src="{{top.url}}" class="image">
 			 	<div class="middle">
 		    		<div class="text">
-		    		{{ top.description }}
+		    		<h4>{{ top.description }}</h4>
 		    		{% for c in top.clk %}
 					<ul> 👚 &nbsp; {{c.keyword_id}} </ul>
 			 		{% endfor %}
@@ -24,56 +23,55 @@
 		  	</div>		
 			 {% endfor %}
 		</div>
-		 <h3>Bottoms:
-			 {% for bottom in bottoms %}
-			 	<div class="container">
-			 	<img class="top" src="{{bottom.url}}" class="image">
-			 	<div class="middle">
-		    		<div class="text">
-		    		{{ bottom.description }}
-		    		{% for c in bottom.clk %}
-					<ul>👖 &nbsp; {{c.keyword_id}}</ul>
-			 		{% endfor %}
-			 		<button data-clothing="{{ bottom.clothing_id }}" class="delbutton">Remove</button>
-		    		</div>
-		  		</div>
-		  	</div>		
-			 {% endfor %}
-
-		 <h3>Dresses:
-			 {% for dress in dresses %}
-			 	<div class="container">
-			 	<img class="top" src="{{dress.url}}" class="image">
-			 	<div class="middle">
-		    		<div class="text">
-		    		{{ dress.description }}
-		    		{% for c in dress.clk %}
-					<ul>👗 &nbsp; {{c.keyword_id}}</ul>
-			 		{% endfor %}
-			 		<button data-clothing="{{ dress.clothing_id }}" class="delbutton">Remove</button>
-		    		</div>
-		  		</div>
-		  	</div>		
-			 {% endfor %}
-
-		 <h3>Jackets:
-			 {% for jacket in jackets %}
-			 	<div class="container">
-			 	<img class="top" src="{{jacket.url}}" class="image">
-			 	<div class="middle">
-		    		<div class="text">
-		    		{{ jacket.description }}
-		    		{% for c in jacket.clk %}
-					<ul>❄ &nbsp; {{c.keyword_id}}</ul>
-			 		{% endfor %}
-			 		<button data-clothing="{{ jacket.clothing_id }}" class="delbutton">Remove</button>
-		    		</div>
-		  		</div>
-		  	</div>		
-			 {% endfor %}
-
-		 <h3>Accessories:
-			 {% for accessory in accessories %}
+		<div class="col-md-3">
+			<div id="high">
+				<img id="shoebox" src="static/img/shoes.png">
+						<div id="shoeModal" class="modal closetmodal">
+						  <span class="close">&times;</span>
+								 {% for shoe in shoes %}
+								 	<div class="container">
+								 	<img class="top" src="{{shoe.url}}" class="image">
+								 	<div class="middle">
+							    		<div class="text">
+							    		{{ shoe.description }}
+							    		{% for c in shoe.clk %}
+										<ul>👠 &nbsp; {{c.keyword_id}}</ul>
+								 		{% endfor %}
+								 		<button data-clothing="{{ shoe.clothing_id }}" class="delbutton">Remove</button> 
+							    		</div>
+							  		</div>
+							  	</div>		
+								 {% endfor %}
+						  <img class="modal-content" id="img01">
+						  <div id="caption"></div>
+						</div>
+			</div>
+			<div id="mid">
+				<img id="jacketbox" src="static/img/jackets.png">
+					<div id="jacketModal" class="modal closetmodal">
+						  <span class="close">&times;</span>
+							 {% for jacket in jackets %}
+							 	<div class="container">
+							 	<img class="top" src="{{jacket.url}}" class="image">
+							 	<div class="middle">
+						    		<div class="text">
+						    		{{ jacket.description }}
+						    		{% for c in jacket.clk %}
+									<ul>❄ &nbsp; {{c.keyword_id}}</ul>
+							 		{% endfor %}
+							 		<button data-clothing="{{ jacket.clothing_id }}" class="delbutton">Remove</button>
+						    		</div>
+						  		</div>
+						  	</div>		
+							 {% endfor %}
+							 <img class="modal-content" id="img01">
+			</div>
+			</div>
+			<div id="low">
+				<img id="otherbox" src="static/img/others.png">
+				<div id="otherModal" class="modal closetmodal">
+					<span class="close">&times;</span>
+				{% for accessory in accessories %}
 			 	<div class="container">
 			 	<img class="top" src="{{accessory.url}}" class="image">
 			 	<div class="middle">
@@ -87,47 +85,98 @@
 		  		</div>
 		  	</div>		
 			 {% endfor %}
-
-		<h3>Shoes:
-			 {% for shoe in shoes %}
-			 	<div class="container">
-			 	<img class="top" src="{{shoe.url}}" class="image">
-			 	<div class="middle">
+			 <img class="modal-content" id="img01">
+			 </div>
+				<img id="dressbox" src="static/img/dress.png">
+				<div id="dressModal" class="modal closetmodal">
+					<span class="close">&times;</span>
+					{% for dress in dresses %}
+				 	<div class="container">
+				 	<img class="top" src="{{dress.url}}" class="image">
+				 	<div class="middle">
 		    		<div class="text">
-		    		{{ shoe.description }}
-		    		{% for c in shoe.clk %}
-					<ul>👠 &nbsp; {{c.keyword_id}}</ul>
+		    		{{ dress.description }}
+		    		{% for c in dress.clk %}
+					<ul>👗 &nbsp; {{c.keyword_id}}</ul>
 			 		{% endfor %}
-			 		<button data-clothing="{{ shoe.clothing_id }}" class="delbutton">Remove</button> 
+			 		<button data-clothing="{{ dress.clothing_id }}" class="delbutton">Remove</button>
 		    		</div>
 		  		</div>
 		  	</div>		
 			 {% endfor %}
-
-
-		  <br>
-		  <br>
-		  <a href="/users">Back to homepage</a>
-		  </h3>
+			 <img class="modal-content" id="img01">
+			</div>
+		</div>
+		</div>
+		<div class="col-md-4 clothes">
+			 {% for bottom in bottoms %}
+			 	<div class="container">
+			 	<img class="top" src="{{bottom.url}}" class="image">
+			 	<div class="middle">
+		    		<div class="text">
+		    		<h4>{{ bottom.description }}</h4>
+		    		{% for c in bottom.clk %}
+					<ul>👖 &nbsp; {{c.keyword_id}}</ul>
+			 		{% endfor %}
+			 		<button data-clothing="{{ bottom.clothing_id }}" class="delbutton">Remove</button>
+		    		</div>
+		  		</div>
+		  	</div>		
+			 {% endfor %}
+		</div>
 		</div>
 	</div>
-</div>
-  <script src="https://code.jquery.com/jquery.js"></script>
-  <script type="text/javascript" >
-        $(function() {
-            $(".delbutton").click(function() {
-                var del_id = $(this).data("clothing");
-                console.log(del_id)
-                var data = {'del_id': del_id}
-                    $.ajax({
-                        type : "POST",a
-                        url : "/delete_clothes",
-                        data: data,
-                        // success : function(data) {console.log(data)} - need to write function to make image disappear
-                    });
-            });
+
+
+ <script src="https://code.jquery.com/jquery.js"></script>
+<script type="text/javascript">
+  $(function() {
+    $(".delbutton").click(function() {
+      var del_id = $(this).data("clothing");
+      var img_id = $(this).closest("div.container");
+      console.log(del_id);
+      var data = {'del_id': del_id};
+      $.ajax({
+          type : "POST",
+          url : "/delete_clothes",
+          data: data,
+          success : function() {
+          	img_id.hide();
+          }
         });
- </script>
+      });
+  });
+
+  $("#shoebox").on('click', function(){
+  	$("#shoeModal").css('display', 'block');
+  });
+  $(".close").on('click', function(){
+  	$("#shoeModal").css('display', 'none');
+  });
+
+  $("#jacketbox").on('click', function(){
+  	$("#jacketModal").css('display', 'block');
+  });
+  $(".close").on('click', function(){
+  	$("#jacketModal").css('display', 'none');
+  });
+
+  $("#dressbox").on('click', function(){
+  	$("#dressModal").css('display', 'block');
+  });
+  $(".close").on('click', function(){
+  	$("#dressModal").css('display', 'none');
+  });
+
+  $("#otherbox").on('click', function(){
+  	$("#otherModal").css('display', 'block');
+  });
+  $(".close").on('click', function(){
+  	$("#otherModal").css('display', 'none');
+  });
+
+
+</script>
 
 
 {% endblock %}

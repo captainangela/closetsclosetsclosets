@@ -1,24 +1,28 @@
 {% extends 'base.html' %}
 {% block content %}
 
- <h3>Favorite Outfits:
+<body class="formbackground" background="static/img/hip-square.png"> 
+
+ <h1>Favorite Outfits:</h1>
  <br>
  <br>
 	{% for key in keys %}
-		{{ key }}:
-		{% for outfit in favorite[key] %}
+		{% if favorite[key] != [] %}
+		<!-- should this compare the length of the list to 0? -->
+			<h3>{{ key }}:
+			{% for outfit in favorite[key] %}
 			<div class="container">
 	 		<img class="top" src="{{ outfit.top.url}}" class="image">
 	 		</div>
 	 		<div class="container">
 	 		<img class="bottom" src="{{ outfit.bottom.url}}" class="image">
 	 		</div>
-		{% endfor %}
+			{% endfor %}
+		{% endif %}
 	{% endfor %}
 	
 
 <br>
 <br>
-
 
 {% endblock %}

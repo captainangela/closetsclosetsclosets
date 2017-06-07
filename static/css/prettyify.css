@@ -90,15 +90,14 @@
 }
 
 .text {
-  background-color: #4CAF50;
+  background-color: #696969;
+  width: 175px;
   color: white;
   font-size: 14px;
-  padding: 16px 16px;
-  text-transform: capitalize
-}
-
-body {
-    font-family: "Lato", sans-serif;
+  padding: 5px;
+  text-transform: capitalize;
+  position: relative;
+  z-index: 1000;
 }
 
 .sidenav {
@@ -112,6 +111,8 @@ body {
     overflow-x: hidden;
     transition: 0.5s;
     padding-top: 60px;
+    position: fixed;
+    z-index: 500;
 }
 
 .sidenav a {
@@ -121,6 +122,7 @@ body {
     color: #818181;
     display: block;
     transition: 0.3s;
+    z-index: 500;
 }
 
 .sidenav a:hover, .offcanvas a:focus{
@@ -133,6 +135,7 @@ body {
     right: 25px;
     font-size: 36px;
     margin-left: 50px;
+    z-index: 500;
 }
 
 @media screen and (max-height: 450px) {
@@ -152,6 +155,7 @@ body {
   left: 0;
   background-color: #efefef;
   text-align: center;
+  font-size: 18px
 }
 
 html {
@@ -170,7 +174,7 @@ body {
   margin: 0;
   padding-bottom: 6rem;
   min-height: 100%;
-  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-family: "Avant Garde", Avantgarde, /*"Century Gothic", CenturyGothic, "AppleGothic"*/ sans-serif;
 }
 
 .demo {
@@ -185,39 +189,48 @@ body {
   width:100px;
 }
 
-.popup-box {
+/*.popup-box {
     position: relative;
-    display: inline-block;
+    display: none;
     cursor: pointer;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-}
+}*/
 
 /* The actual popup */
-.popup-box .popuptext {
+.popuptext {
     visibility: hidden;
-    width: 160px;
-    height: 160px;
-    background-color: #555;
-    color: #FA8072;
+    width: 200px;
+    height: 200px;
+    background-color: #A9A9A9;
+    color: #2F4F4F;
     text-align: center;
     border-radius: 6px;
     padding: 8px 0;
     position: absolute;
     z-index: 1;
-    bottom: 200%;
     left: 50%;
-    margin-left: -80px;
+    margin-left: -95px;
     margin-bottom: -225px;
 }
 
-/* Toggle this class - hide and show the popup */
-.popup-box .show {
+/*Toggle this class - hide and show the popup */
+.show {
     visibility: visible;
     -webkit-animation: fadeIn 1s;
     animation: fadeIn 1s;
+}
+
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;} 
+    to {opacity: 1;}
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
 }
 
 h1 {
@@ -234,26 +247,17 @@ h1 {
     letter-spacing: .05em;
     text-shadow: 
       4px 4px 0px #d5d5d5, 
-      7px 7px 0px rgba(0, 0, 0, 0.2);*/
-}
+      7px 7px 0px rgba(0, 0, 0, 0.2);
+}*/
 
 .btn {
-  background: #484f54;
-  background-image: -webkit-linear-gradient(top, #484f54, #6d828f);
-  background-image: -moz-linear-gradient(top, #484f54, #6d828f);
-  background-image: -ms-linear-gradient(top, #484f54, #6d828f);
-  background-image: -o-linear-gradient(top, #484f54, #6d828f);
-  background-image: linear-gradient(to bottom, #484f54, #6d828f);
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border-radius: 28px;
-  -webkit-box-shadow: 0px 1px 3px #5e425e;
-  -moz-box-shadow: 0px 1px 3px #5e425e;
-  box-shadow: 0px 1px 3px #5e425e;
+  -webkit-border-radius: 60;
+  -moz-border-radius: 60;
+  border-radius: 60px;
   font-family: Arial;
   color: #ffffff;
-  font-size: 20px;
-  padding: 10px 14px 10px 14px;
+  font-size: 18px;
+  background: #354647;
   text-decoration: none;
 }
 
@@ -265,4 +269,302 @@ h1 {
   background-image: -o-linear-gradient(top, #c8aecf, #dde5eb);
   background-image: linear-gradient(to bottom, #c8aecf, #dde5eb);
   text-decoration: none;
+}
+
+div.title {
+    font: x-large Verdana, Arial, Helvetica, sans-serif;
+    text-align: center;
+    height: 40px;
+    background-color: white;
+    color: black;
+    }
+/* Styling for the footer */
+div.footer {
+    font: small Verdana, Arial, Helvetica, sans-serif;
+    text-align: center;
+    }
+/* Styling for the overall table */
+table {
+    font: 100% Verdana, Arial, Helvetica, sans-serif;
+    table-layout: fixed;
+    border-collapse: collapse;
+    width: 100%;
+    }
+/* Styling for the column headers (days of the week) */
+th {
+    padding: 0 0.5em;
+    text-align: center;
+    background-color:gray;
+    color:white;
+    }
+/* Styling for the individual cells (days) */
+td  {     
+    font-size: medium;
+    padding: 0.25em 0.25em;   
+    width: 14%; 
+    height: 80px;
+    text-align: left;
+    vertical-align: top;
+    }
+/* Styling for the date numbers */
+.date  {     
+    font-size: large;
+    padding: 0.25em 0.25em;   
+    text-align: left;
+    vertical-align: top;
+    }
+/* Class for individual days (coming in future release) */
+.sun {
+     color:red;
+     }
+/* Hide the month element (coming in future release) */
+th.month {
+    visibility: hidden;
+    display:none;
+    }
+   
+.transparent-box{
+  margin: auto;
+  background: rgba(220,220,220, 0.55);
+  width: 500px;
+  height: 120px;
+  padding: 0.70em 0.50em;   
+}
+
+.formbackground{
+    background-repeat: repeat;
+    background-size: contain, auto;
+    background-attachment: fixed;
+    background-position: cover; 
+}
+
+.navbarbtn{
+  font-size:60px;
+  cursor:pointer;
+  position:fixed;
+  z-index:499;
+}
+
+.control-group {
+  display: inline-block;
+  vertical-align: top;
+  background: #fff;
+  text-align: left;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  padding: 30px;
+  width: 200px;
+  height: 210px;
+  margin: 10px;
+}
+.control {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  font-size: 18px;
+}
+.control input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+.control__indicator {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  height: 18px;
+  width: 18px;
+  background: #ad9595;
+}
+.control:hover input ~ .control__indicator,
+.control input:focus ~ .control__indicator {
+  background: #ccc;
+}
+.control input:checked ~ .control__indicator {
+  background: #2aa1c0;
+}
+.control:hover input:not([disabled]):checked ~ .control__indicator,
+.control input:checked:focus ~ .control__indicator {
+  background: #0e647d;
+}
+.control input:disabled ~ .control__indicator {
+  background: #e6e6e6;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.control__indicator:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+.control input:checked ~ .control__indicator:after {
+  display: block;
+}
+.control--checkbox .control__indicator:after {
+  left: 8px;
+  top: 4px;
+  width: 3px;
+  height: 8px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.control--checkbox input:disabled ~ .control__indicator:after {
+  border-color: #7b7b7b;
+}
+
+#urlImg{
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  display: block;
+  display: none;
+}
+
+#closettitle{
+  margin: 0 0 0 -30%;
+  display: block;
+  text-align: center;
+  left: 50%;
+  position: fixed;
+}
+
+#closettitle-wrapper{
+  height: 100%;
+}
+
+#closet{
+  margin-top: 10%;
+  display: block;
+  text-align: left;
+}
+
+h3{
+  text-align: center;
+}
+
+.clothes{
+  height: 500px;
+  overflow-y: scroll;
+  margin-top:20px;
+}
+
+#high{
+  height: 100px;
+}
+
+#mid{
+  height: 100px;
+}
+
+#low{
+  height: 200px;
+  display: inline-block;
+}
+
+#shoebox{
+  width:60%;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#jacketbox{
+  margin-left: 60%;
+  margin-top: 5%;
+  display: block;
+  width:70%;
+}
+
+#dressbox{
+  margin-top: 35%;
+  width: 50%;
+  float: left;
+}
+
+#otherbox{
+  margin-top: 35%;
+   width: 50%;
+   float: right;
+}
+
+#myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+#silvy{
+  width: 70px;
+  height: 70px;
+  margin: auto;
+  display: block;
+  position: absolute;
+  bottom: 0;
+}
+
+.delbutton{
+  margin: auto;
+  display: block;
+}
+
+#submitcontainer{
+  padding: 100px;
+}
+
+.closetmodal{
+  position: absolute;
+  background: rgba(220,220,220, 0.55);
+  width: 350px;
+  height: 500px;
+  z-index: 500;
+  overflow-y:auto;
+  /*display: none;*/
+}
+
+.btn:focus {
+     outline: 0px auto -webkit-focus-ring-color; 
+     outline-offset: -2px; 
+}
+
+.close{
+  float: left;
+  z-index: 500;
+  position: fixed;
+}
+
+.btn-primary{
+  margin-top: 50px;
+  margin-left: 150px;
+  display: block;
+}
+
+.outfits{
+  margin-top: 35px !important;
+  padding-top: 20px !important;
+}
+
+.closetclothes{
+  display: inline-block;
+}
+
+.outfitpopuptext {
+    /*visibility: hidden;*/
+    width: 200px;
+    height: 400px;
+    /*background: rgba(220,220,220, 0.55);*/
+    color: #2F4F4F;
+    text-align: center;
+    border-radius: 6px;
+    padding: 8px 0;
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    margin-left: -95px;
+    margin-bottom: -225px;
+}
+
+.gotoutfit{
+  background-color: #ffffb2;
 }

@@ -1,38 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
-
-<!-- Adding navbar -->
-
-<div id="mySidenav" class="sidenav">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="/add_clothes">Add clothes</a>
-  <a href="/closet">See your closet</a>
-  <a href="/outfit">Get an outfit</a>
-  <a href="/favorites">Favorite Outfits</a>
-  <a href="/past_outfits">Past Outfits</a>
-</div>
-
 <br>
-
-<p>
-<span style="font-size:60px;cursor:pointer" onclick="openNav()">&#9776;</span>
-</p> 
-<script>
-  /* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
-  function openNav() {
-      document.getElementById("mySidenav").style.width = "250px";
-      document.getElementById("main").style.marginLeft = "250px";
-  }
-
-  /* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
-  function closeNav() {
-      document.getElementById("mySidenav").style.width = "0";
-      document.getElementById("main").style.marginLeft = "0";
-  }
-</script>
-
+<br>
+<br>
+<br>
+<br>
 <div id="main">
-  <body class="closetbackground" background="/static/img/lego2.png"> 
+  <body class="closetbackground" background="/static/img/lego3.png"> 
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -45,13 +19,13 @@
 </div>
 <div class="w3-content w3-section" style="max-width:200px">
   <img class="myTops w3-animate-right" src="/static/img/stripe.png" style="width:100%">
-  <img class="myTops w3-animate-left" src="/static/img/sportgrey.png" style="width:80%">
+  <img class="myTops w3-animate-left" src="/static/img/sportgrey.png" style="width:100%">
 </div>
 
 <div class="w3-content w3-section" style="max-width:200px">
   <img class="myBottoms w3-animate-left" src="/static/img/jeans.png" style="width:100%">
-  <img class="myBottoms w3-animate-right" src="/static/img/black.png" style="width:80%">
-  <img class="myBottoms w3-animate-left" src="/static/img/skirt.png" style="width:75%">
+  <img class="myBottoms w3-animate-right" src="/static/img/black.png" style="width:100%">
+  <img class="myBottoms w3-animate-left" src="/static/img/skirt.png" style="width:100%">
 </div>
 
 <script>
@@ -88,28 +62,6 @@ function carousel2() {
 }
 </script>
 
-<!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-  Launch demo modal
-</button> -->
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Add Clothes</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
 
 {% endblock %}

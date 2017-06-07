@@ -3,51 +3,67 @@
 
 <body class="closetbackground" background="static/img/cupboard.png"> 
 
-The weather is {{ temp }}℉ <br>
-
-{% if temp < 65 %}
-  It's cold out. You're probably going to want a jacket.
-{% else %}
-  It's warm out! You don't need a jacket today.
-{% endif %}
-<div align="center">
   <br>
   <script src="https://code.jquery.com/jquery.js"></script>
 
-  <h2>Your outfit for <i>{{ activity }}</i>:</h2><br>
-  <button id="addjacket">Add Jacket</button>
+  <!-- <h1>Your outfit for <i>{{ activity }}</i>:</h1><br> -->
+  
   <br>
 
-  <div>
-    {% if top == None %}
-      You don't have any tops for this occasion!
-    {% else %}
-      <img id="tops" class="top" src="{{ top }}">
-    {% endif %}
-    <button id="changetop">Random Shirt</button> 
+<div class="container-fluid outfits">
+  <div class="col-md-5">
+    <div>
+    <img id="accessory" class="accessories" src="{{ accessory }}" style="display: none;">
+      <button class="btn" id="addaccessory">Add Accessory 👓</button> 
+    </div>  
+    <br>
+    <div>
+      <img id="shoe" class="shoes" src="{{ shoe }}" style="display: none;">
+      <button class="btn" id="addshoes">Add Shoes 👠</button>
+    </div>
+    <br>
+    <div>
+      <button class="btn" data-url="{{ top }}" id="favoriteoutfit">Favorite This Outfit ⭐️</button>
+    </div>
+    <br>
+    <div>
+      <button class="btn" data-url="{{ top }}" id="weartoday">Wear Today!</button>
+    </div> 
+    <br>
+    <div>
+      <button id="addjacket" class="btn">Add Jacket</button>
+    </div>
   </div>
-  <div>
-    <img id="bottoms" class="bottom" src="{{ bottom }}">
-    <button id="changebottom">Random Bottom</button> 
-  </div>  
-  <div>
+  <div class="col-md-4">
+      <div class="closetclothes">
+        {% if top == None %}
+        You don't have any tops for this occasion!
+        {% else %}
+        <img id="tops" class="top" src="{{ top }}">
+        {% endif %}
+        <button class="btn" id="changetop">Next</button> 
+      </div>
+      <div class="closetclothes">
+        <img id="bottoms" class="bottom" src="{{ bottom }}">
+        <button class="btn" id="changebottom">Next</button> 
+      </div> 
+      <div>
+      <a href="/outfit">Make another outfit for another activity</a><br>
+      </div>
+  </div> 
+    <div>
     <img id="jacket" class="jackets" src="{{ jacket }}" style="display: none;">
   </div>
+  <div class="col-md-2 col-md-offset-1"> 
   <div>
-    <img id="accessory" class="accessories" src="{{ accessory }}" style="display: none;">
-    <button id="addaccessory">Add Accessory</button> 
-  </div>  
-  <div>
-    <img id="shoe" class="shoes" src="{{ shoe }}" style="display: none;">
-    <button id="addshoes">Add Shoes</button>
-  </div>  
-  <div>
-  <button data-url="{{ top }}" id="favoriteoutfit">Favorite This Outfit</button>
+    <h4>The weather is {{ temp }}℉. <br><br>
+    {% if temp < 65 %}
+      It's cold out. You're probably going to want a jacket.
+    {% else %}
+      It's warm out! You don't need a jacket today.
+    {% endif %}</h4>
+    </div>
   </div>
-  <div>
-  <button data-url="{{ top }}" id="weartoday">Wear Today!</button>
-  </div>
-
 <script>
   var temp = {{ temp }}
 
@@ -74,7 +90,7 @@ The weather is {{ temp }}℉ <br>
   $(function(){
     $("#addshoes").click(function (){
       $(this).text(function(i, text){
-        return text == "Add Shoes" ? "No Shoes" : "Add Shoes";
+        return text == "Add Shoes 👠" ? "No Shoes 👠" : "Add Shoes 👠";
       })
     });
   })
@@ -89,7 +105,7 @@ The weather is {{ temp }}℉ <br>
   $(function(){
     $("#addaccessory").click(function (){
       $(this).text(function(i, text){
-        return text == "Add Accessory" ? "No Accessory" : "Add Accessory";
+        return text == "Add Accessory 👓" ? "No Accessory 👓" : "Add Accessory 👓";
       })
     });
   })
@@ -178,7 +194,7 @@ $(function() {
 
 <br>
 <br>
-<a href="/outfit">Make another outfit for another activity</a><br>
+
 
 <br>
 {% endblock %}

@@ -2,7 +2,7 @@
 
 from jinja2 import StrictUndefined
 
-from flask import Flask, render_template, request, flash, redirect, session
+from flask import Flask, render_template, request, flash, redirect, session, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 
 from model import connect_to_db, db, Users, Articles, Category, Keyword, ClothingKeyword, Favorites, History
@@ -10,16 +10,9 @@ from model import connect_to_db, db, Users, Articles, Category, Keyword, Clothin
 import hashlib, pyowm, random
 
 
-
 categories = 'tops bottoms dresses jackets accessories shoes'.split()
 keywords = ['Urban Hike','Dinner','Brunch','Workout','Concert','Girls Night Out',
             'Hiking','Casual Date','Stay At Home','Beach','Picnic','Date Night','Pool', 'Work']
-
-# category = Category.query.all()
-# categories = []
-# for cat in category:
-#     categories.append(cat.category_id)
-
 
 app = Flask(__name__)
 
@@ -42,6 +35,23 @@ def get_weather():
     status = weather._status
     
     return temp, status
+
+
+def get_chart_data():
+    """Get clothes data."""
+
+    closet = {
+        category: [Articles.query.filter(Articles.category_id==category, 
+                                        Articles.username==session['username']).count(), {}]
+        for category in categories}
+
+    for category in closet:
+        for keyword in keywords:
+            clks = ClothingKeyword.query.filter(ClothingKeyword.keyword_id==keyword).all()
+            clks = [clk.articles.category_id for clk in clks if clk.articles.category_id==category]
+            closet[category][1][keyword] = len(clks)
+
+    return closet
 
 
 @app.route('/')
@@ -118,7 +128,6 @@ def logout():
     """Log out."""
 
     del session["username"]
-    flash("Logged Out.")
     return redirect("/")
 
 
@@ -238,6 +247,14 @@ def show_closet():
     return render_template("closet.html", **closet)
 
 
+@app.route("/get-chart-data.json")
+def getting_chart_data():
+
+    chart_data = get_chart_data()
+
+    return jsonify(chart_data)
+
+
 @app.route("/delete_clothes", methods=['POST'])
 def delete_clothes():
     """"Deletes clothes from user's closet"""
@@ -288,6 +305,9 @@ def show_favorites():
                                         Favorites.username==session['username']).all()
         for keyword in keywords
     }
+
+    # for k, v in favorite.iteritems():
+    #     print k, v
 
     return render_template("favorites.html", keys=favorite.keys(), favorite=favorite)
     
@@ -341,7 +361,7 @@ if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point
     # that we invoke the DebugToolbarExtension
 
-    app.debug = True
+    app.debug = False
 
     connect_to_db(app)
 
