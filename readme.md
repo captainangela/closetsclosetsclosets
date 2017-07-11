@@ -18,7 +18,7 @@ Register or login to..
 
 Add clothes to your closet.
 
-![Add Clothes](https://media.giphy.com/media/3NtY188QaxDdC/giphy-downsized.gif)
+![Add Clothes](static/img/addclothes.gif)
 <br/><br/><br/>
 
 See clothes in your closet organized by category.
