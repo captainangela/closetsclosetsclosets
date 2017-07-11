@@ -14,11 +14,11 @@ __APIs:__ OpenWeatherMap <br/>
 
 
 ## <a name="features"></a>Features 
-###Register or login to.. 
+Register or login to.. 
 
 Add clothes to your closet.
 
-![Add Clothes](/static/img/addclothes.gif)
+![Add Clothes](/static/img/unnamed.png)
 <br/><br/><br/>
 
 See clothes in your closet organized by category.
