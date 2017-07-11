@@ -14,9 +14,12 @@ __APIs:__ OpenWeatherMap <br/>
 
 
 ## <a name="features"></a>Features 
-Register or login for for personalized closet functionality.  
+###Register or login to.. 
 
 Add clothes to your closet.
+
+![Add Clothes](/static/img/addclothes.gif)
+<br/><br/><br/>
 
 See clothes in your closet organized by category.
 
@@ -26,32 +29,6 @@ See favorite outfits organized by occasion.
 
 See history of outfits on calendar. 
 
-
-## <a name="installation"></a>Setup/Installation
-
-####Requirements:
-- PostgreSQL
-- Python 2.7
-- Flickr and Twilio API keys
-
-To have this app running on your local computer, please follow the below steps:
-
-Clone repository:
-```
-$ git clone https://github.com/captainangela/closetsclosetsclosets.git
-```
-Create a virtual environment:
-```
-$ virtualenv env
-```
-Activate the virtual environment:
-```
-$ source env/bin/activate
-```
-Install dependencies:
-```
-$ pip install -r requirements.txt
-```
 
 ## <a name="license"></a>License
 
