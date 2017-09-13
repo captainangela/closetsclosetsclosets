@@ -3,7 +3,10 @@
 from jinja2 import StrictUndefined
 
 from flask import Flask, render_template, request, flash, redirect, session, jsonify
+
 from flask_debugtoolbar import DebugToolbarExtension
+
+from sqlalchemy import exc
 
 from model import connect_to_db, db, Users, Articles, Category, Keyword, ClothingKeyword, Favorites, History
 
@@ -87,12 +90,16 @@ def register_process():
 
     new_user = Users(username=username, password=hash, fname=fname, 
                      lname=lname, bday=bday, zipcode=zipcode)
+    try:
+        db.session.add(new_user)
+        db.session.commit()
+    except exc.IntegrityError:
+        db.session.rollback()
+        flash("Sorry, that user name is taken. Please choose another.")
+        return redirect("/register")
+    else:
 
-    db.session.add(new_user)
-    db.session.commit()
-
-    flash("User %s added." % username)
-    return redirect("/users")
+        return redirect("/")
 
 
 @app.route('/login', methods=['POST'])
@@ -260,14 +267,20 @@ def delete_clothes():
     """"Deletes clothes from user's closet"""
     
     article_id = request.form["del_id"]
+    print article_id
 
     delete_clothing_article = Articles.query.get(article_id)
+    print delete_clothing_article
     delete_clothing_keywords = ClothingKeyword.query.filter(ClothingKeyword.clothing_id==article_id).all()
 
+    print delete_clothing_keywords
+
     for item in delete_clothing_keywords:
+        print item
         db.session.delete(item)
 
     db.session.delete(delete_clothing_article)
+    print "deleted clothing"
     db.session.commit()
 
     return "success!"

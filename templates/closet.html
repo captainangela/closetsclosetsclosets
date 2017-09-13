@@ -140,7 +140,8 @@
           type : "POST",
           url : "/delete_clothes",
           data: data,
-          success : function() {
+          success : function(result) {
+          	console.log(result)
           	img_id.hide();
           }
         });
