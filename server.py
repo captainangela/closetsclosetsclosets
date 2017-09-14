@@ -10,7 +10,9 @@ from sqlalchemy import exc
 
 from model import connect_to_db, db, Users, Articles, Category, Keyword, ClothingKeyword, Favorites, History
 
-import hashlib, pyowm, random
+import hashlib, random
+
+# import pyowm
 
 
 categories = 'tops bottoms dresses jackets accessories shoes'.split()
@@ -24,20 +26,20 @@ app.secret_key = "mynameisangelahaha"
 
 app.jinja_env.undefined = StrictUndefined
 
-def get_weather():
-    """Get weather."""
-    owm = pyowm.OWM('bad06f5e17057b9e7b8ad4bbee71b22e')
+# def get_weather():
+#     """Get weather."""
+#     # owm = pyowm.OWM('bad06f5e17057b9e7b8ad4bbee71b22e')
 
-    user = Users.query.get(session["username"])
-    zipcode = user.zipcode
+#     user = Users.query.get(session["username"])
+#     zipcode = user.zipcode
 
-    #get weather for zipcode entered -- should this be in an outside function?
-    observation = owm.weather_at_place(zipcode)
-    weather = observation.get_weather()
-    temp = weather.get_temperature('fahrenheit')
-    status = weather._status
+#     #get weather for zipcode entered -- should this be in an outside function?
+#     observation = owm.weather_at_place(zipcode)
+#     weather = observation.get_weather()
+#     temp = weather.get_temperature('fahrenheit')
+#     status = weather._status
     
-    return temp, status
+#     return temp, status
 
 
 def get_chart_data():
@@ -124,8 +126,8 @@ def login_process():
         return redirect("/login")
 
     session['username'] = user.username
-    session["temp"] = get_weather()[0]["temp"]
-    session["status"] = get_weather()[1]
+    # session["temp"] = get_weather()[0]["temp"]
+    # session["status"] = get_weather()[1]
 
     return redirect("/users")
 
@@ -202,15 +204,15 @@ def enter_outfit_details():
 
 @app.route("/outfit_generated", methods=['POST'])
 def get_random_outfit():
-    owm = pyowm.OWM('bad06f5e17057b9e7b8ad4bbee71b22e')
+    # owm = pyowm.OWM('bad06f5e17057b9e7b8ad4bbee71b22e')
 
     zipcode = request.form["zipcode"]
     activity = request.form["activity"]
 
     #get weather for zipcode entered -- should this be in an outside function?
     observation = owm.weather_at_place(zipcode)
-    weather = observation.get_weather()
-    temp = weather.get_temperature('fahrenheit')
+    # weather = observation.get_weather()
+    # temp = weather.get_temperature('fahrenheit')
   
     clothing_dictionary = {}
     for category in categories:
@@ -374,7 +376,7 @@ if __name__ == "__main__":
     # We have to set debug=True here, since it has to be True at the point
     # that we invoke the DebugToolbarExtension
 
-    app.debug = False
+    app.debug = True
 
     connect_to_db(app)
 
