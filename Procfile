@@ -1,1 +1,1 @@
-web: gunicorn cleverclosets.wsgi
+web: gunicorn cleverclosets:app
