@@ -1,1 +1,1 @@
-web: gunicorn cleverclosets:app
+web: gunicorn cleverclosets.wsgi --log-file -
