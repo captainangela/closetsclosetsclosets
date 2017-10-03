@@ -1,1 +1,1 @@
-web: gunicorn cleverclosets.wsgi --log-file -
+web: gunicorn --pythonpath app app.wsgi
