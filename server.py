@@ -322,7 +322,7 @@ def show_favorites():
     }
 
     # for k, v in favorite.iteritems():
-    #     print k, v
+    #     print(k, v)
 
     return render_template("favorites.html", keys=favorite.keys(), favorite=favorite)
     
@@ -364,7 +364,7 @@ def get_past_outfit():
     date_worn = request.args.get('date')
     outfit = History.query.filter(History.date_worn==date_worn).first()
 
-    print date_worn
+    print(date_worn)
 
     if outfit:
         return outfit.hist_bottom.url + " " + outfit.hist_top.url 
