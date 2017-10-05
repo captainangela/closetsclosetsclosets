@@ -269,20 +269,20 @@ def delete_clothes():
     """"Deletes clothes from user's closet"""
     
     article_id = request.form["del_id"]
-    print article_id
+    print(article_id)
 
     delete_clothing_article = Articles.query.get(article_id)
-    print delete_clothing_article
+    print(delete_clothing_article)
     delete_clothing_keywords = ClothingKeyword.query.filter(ClothingKeyword.clothing_id==article_id).all()
 
-    print delete_clothing_keywords
+    print(delete_clothing_keywords)
 
     for item in delete_clothing_keywords:
-        print item
+        print(item)
         db.session.delete(item)
 
     db.session.delete(delete_clothing_article)
-    print "deleted clothing"
+    print("deleted clothing")
     db.session.commit()
 
     return "success!"
