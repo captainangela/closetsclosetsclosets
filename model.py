@@ -13,7 +13,7 @@ import urlparse
 db = SQLAlchemy()
 
 urlparse.uses_netloc.append("postgres")
-url = urlparse.urlparse(os.environ["DATABASE_URL"])
+url = urlparse.urlparse(os.environ["postgres://tjfkbrciezgomt:678406dbf0d0f27cc0d69e8e1238313cbe7f5b2f17b8068777bcdbcf0b984901@ec2-23-23-248-247.compute-1.amazonaws.com:5432/d5somu8us0qes3"])
 
 conn = psycopg2.connect(
     database=url.path[1:],
