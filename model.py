@@ -12,16 +12,7 @@ import urlparse
 
 db = SQLAlchemy()
 
-urlparse.uses_netloc.append("postgres")
-url = urlparse.urlparse(os.environ["DATABASE_URL"])
 
-conn = psycopg2.connect(
-    database=url.path[1:],
-    user=url.username,
-    password=url.password,
-    host=url.hostname,
-    port=url.port
-)
 
 ################################ORM########################################
 
@@ -163,7 +154,7 @@ class History(db.Model):
 #     print "Connected to DB."
 
 
-# def connect_to_db(app):
+def connect_to_db(app):
 #     """Connect the database to our Flask app."""
 
 #     # Configure to use our database.
@@ -172,6 +163,17 @@ class History(db.Model):
 #     # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 #     db.app = app
 #     db.init_app(app)
+
+    urlparse.uses_netloc.append("postgres")
+    url = urlparse.urlparse(os.environ["DATABASE_URL"])
+
+    conn = psycopg2.connect(
+        database=url.path[1:],
+        user=url.username,
+        password=url.password,
+        host=url.hostname,
+        port=url.port
+    )
 
 
 if __name__ == "__main__":
