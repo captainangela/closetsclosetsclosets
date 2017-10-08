@@ -157,23 +157,23 @@ def init_app():
 def connect_to_db(app):
 #     """Connect the database to our Flask app."""
 
-#     # Configure to use our database.
-#     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
-#     app.config['SQLALCHEMY_ECHO'] = False
-#     # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-#     db.app = app
-#     db.init_app(app)
+    # Configure to use our database.
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+    app.config['SQLALCHEMY_ECHO'] = False
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    db.app = app
+    db.init_app(app)
 
-    urlparse.uses_netloc.append("postgres")
-    url = urlparse.urlparse(os.environ["DATABASE_URL"])
+    # urlparse.uses_netloc.append("postgres")
+    # url = urlparse.urlparse(os.environ["DATABASE_URL"])
 
-    conn = psycopg2.connect(
-        database=url.path[1:],
-        user=url.username,
-        password=url.password,
-        host=url.hostname,
-        port=url.port
-    )
+    # conn = psycopg2.connect(
+    #     database=url.path[1:],
+    #     user=url.username,
+    #     password=url.password,
+    #     host=url.hostname,
+    #     port=url.port
+    # ) 
 
 
 if __name__ == "__main__":
