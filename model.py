@@ -145,13 +145,13 @@ class History(db.Model):
 ##############################################################################
 # Helper functions
 
-# def init_app():
-#     # So that we can use Flask-SQLAlchemy, we'll make a Flask app.
-#     from flask import Flask
-#     app = Flask(__name__)
+def init_app():
+    # So that we can use Flask-SQLAlchemy, we'll make a Flask app.
+    from flask import Flask
+    app = Flask(__name__)
 
-#     connect_to_db(app)
-#     print "Connected to DB."
+    connect_to_db(app)
+    print "Connected to DB."
 
 
 def connect_to_db(app):
