@@ -158,6 +158,7 @@ def connect_to_db(app):
 #     """Connect the database to our Flask app."""
 
     # Configure to use our database.
+    print app.config
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
     app.config['SQLALCHEMY_ECHO'] = False
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -185,5 +186,5 @@ if __name__ == "__main__":
 
     app = Flask(__name__)
 
-    #connect_to_db(app)
+    connect_to_db(app)
     print "Connected to DB."

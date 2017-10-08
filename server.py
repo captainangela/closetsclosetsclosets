@@ -8,8 +8,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 
 from sqlalchemy import exc
 
-from model import connect_to_db, Users, Articles, Category, Keyword, ClothingKeyword, Favorites, History
-#, db
+from model import connect_to_db, Users, Articles, Category, Keyword, ClothingKeyword, Favorites, History, db
 
 import hashlib, random
 
